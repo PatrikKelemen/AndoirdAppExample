@@ -4,6 +4,6 @@
 
 | Name | Student Number |
 | --- | --- |
-| Andrew Forward | 1484511  |
-| Andrew Forward | 1929204  |
+| Patrik Kelemen | 300059871 |
+|  | 1929204  |
 | Ayana Nurse | 2128439 |
