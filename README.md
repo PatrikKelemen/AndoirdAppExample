@@ -9,4 +9,3 @@
 | Angelica Paynter | 300062844 |
 | Zhen Wang | 300057304 |
 | Mathieu Bellefeuille | 6501369 |
-| Ayana Nurse | 2128439 |
