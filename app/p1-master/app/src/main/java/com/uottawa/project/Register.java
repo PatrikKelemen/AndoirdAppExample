@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.TextView;
 
 public class Register extends AppCompatActivity {
 
@@ -17,6 +18,35 @@ public class Register extends AppCompatActivity {
     public void onRegister(View view) {
         //Check that data is valid here
         boolean validData = true;
+
+        //get strings
+        String stringPassword = (TextView)findViewById(password).getText().toString();
+        String stringConfirmPassword = (TextView)findViewById(comfirmpassword).getText().toString();
+        String stringUsername = (TextView)findViewById(username).getText().toString();
+        String stringEmail = (TextView)findViewById(email).getText().toString();
+        String stringFirst = (TextView)findViewById(firstname).getText().toString();
+        String stringLast = (TextView)findViewById(lastname).getText().toString();
+
+
+        //check if all fields filled
+        if (stringPassword.isEmpty()
+                || stringConfirmPassword.isEmpty()
+                || stringEmail.isEmpty()
+                || stringFirst.isEmpty()
+                || stringLast.isEmpty()
+                || stringUsername.isEmpty()) {
+            validData = false;
+        }
+
+        //check if username taken
+
+        // check if email taken
+
+        //check if password matches confirm password
+
+        if (!stringPassword.equals(stringConfirmPassword)){
+            validData = false;
+        }
 
         if (validData) {
             //create new account here
