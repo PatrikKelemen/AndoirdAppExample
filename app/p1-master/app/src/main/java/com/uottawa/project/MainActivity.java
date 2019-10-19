@@ -21,8 +21,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void onLogin(View view) {
         //Check that the password and username are valid here
+        boolean validData = true;
 
-        Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
-        startActivityForResult(intent,0);
+        if(!validData){
+            validData = false;
+        }
+
+
+        if (validData) {
+            Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+            startActivityForResult(intent, 0);
+        }
     }
 }
