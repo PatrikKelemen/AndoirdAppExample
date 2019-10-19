@@ -9,13 +9,20 @@ import android.widget.TextView;
 
 public class Register extends AppCompatActivity {
 
+    private DBHandler mydb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mydb = new DBHandler();
     }
 
     public void onRegister(View view) {
+
+
+
         //Check that data is valid here
         boolean validData = true;
 
@@ -36,20 +43,33 @@ public class Register extends AppCompatActivity {
                 || stringLast.isEmpty()
                 || stringUsername.isEmpty()) {
             validData = false;
+            (TextView)findViewById(username).setText("please fill in all fields");
         }
 
         //check if username taken
+        if(mydb.dbSearch("username","userInfoPatients",stringUsername)||
+                mydb.dbSearch("username","userInfoEmployees",stringUsername)){
+            validData = false;
+            (TextView)findViewById(username).setText("username taken");
 
+        }
         // check if email taken
-
+        if (mydb.dbSearch("email","userInfoPatients",stringEmail)||
+                mydb.dbSearch("email","userInfoEmployees",stringEmail)){
+            validData = false;
+            (TextView)findViewById(email).setText("email taken");
+        }
         //check if password matches confirm password
 
         if (!stringPassword.equals(stringConfirmPassword)){
             validData = false;
+            (TextView)findViewById(confirmpassword).setText("password do not match");
         }
 
         if (validData) {
             //create new account here
+
+
 
             Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
             startActivityForResult(intent, 0);
