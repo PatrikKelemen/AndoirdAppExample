@@ -1,0 +1,66 @@
+class Account
+{  
+  String password;  
+  byte[] hashPassword;
+  String userName;
+  String firstName;
+  String lastName;
+  public byte[] hashPassword(String){}
+  
+  
+  
+}
+
+class Admin
+{
+    isA Account;
+   Service[] services;
+  public void deleteService(Service) {}
+  public void createService(Service) {}
+  public void deleteUser(Account) {}
+  public void deleteClinic(Clinic) {}
+  
+}
+
+class Employee
+{
+    isA Account;
+  Clinic clinic;
+  public void createClinic(String) {}
+  
+}
+
+class Clinic
+{
+    isA Account;
+  String name; 
+  ArrayList<Service> services;
+  int[] openHours;
+  int[] closeHours;
+  public void addService(Service) {}
+  public void removeService(Service) {}
+  public void setHours() {}
+}//$?[End_of_model]$?
+
+namespace -;
+
+
+class Account
+{
+  position 335 30 144 124;
+}
+
+class Admin
+{
+  position 628 291 221 146;
+}
+
+class Employee
+{
+  position 360 294 208 93;
+}
+
+class Clinic
+{
+  position 94 289 230 181;
+}

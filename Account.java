@@ -1,14 +1,21 @@
+import java.security.*;
+import java.nio.charset.StandardCharsets;
 public class Account {
 	
 	/*
 	* Stores the account's password.
 	*/
 	private String password;
-
+	
+	/*
+	*Store the account's Hash password
+	*/
+	private byte[] hashPassword;
+	
 	/*
 	* Stores the account's username.
 	*/
-	private String username;
+	private String userName;
 
 	/*
 	* Stores the account's profile picture.
@@ -38,9 +45,28 @@ public class Account {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		hashPassword = hashPassword(password);
 	}
+	
+	/*
+	*Methode to hash password to SHA-256
+	*/
+	public byte[] hashPassword(String pass){
+	
+		try{
+			
+			//hashing the password to SHA-256 
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] passwordHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+			return passwordHash;
+		}
+		catch(Exception e){
+			return null;
+		}
+	}
+	
 
-
+	
 	//Getters & Setters
 	public String getPassword() {
 		return password;
