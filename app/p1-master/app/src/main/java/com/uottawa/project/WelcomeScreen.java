@@ -18,7 +18,7 @@ public class WelcomeScreen extends AppCompatActivity {
         Intent returnIntent = new Intent();
         //We might use this to send stuff to the next page??
         //returnIntent.putExtra("imageID", selectedImage.getId());
-        
+
         setResult(RESULT_OK, returnIntent);
         finish();
     }
