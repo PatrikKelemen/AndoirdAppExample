@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DBHandler mydb;
+    private DbHandler mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mydb = new DBHandler();
+        mydb = new DbHandler();
     }
 
     public void onRegister(View view) {
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     public void onLogin(View view) {
         //Check that the password and username are valid here
         String accountType;
-        String stringUsername = (TextView)findViewById(username).getText().toString();
-        String stringPassword = (TextView)findViewById(password).getText().toString();
+        String stringUsername = ((TextView)findViewById(R.id.username)).getText().toString();
+        String stringPassword = ((TextView)findViewById(R.id.password)).getText().toString();
         boolean validData = true;
 
         if (mydb.dbSearch("username","userInfoEmployees",stringUsername)) {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             validData = false;
         }
         if (){
-            (TextView)findViewById(password).setText("username or password is wrong");
+            ((TextView)findViewById(R.id.password)).setText("username or password is wrong");
         }
 
 

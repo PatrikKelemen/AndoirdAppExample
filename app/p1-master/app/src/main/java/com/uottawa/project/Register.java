@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 public class Register extends AppCompatActivity {
 
-    private DBHandler mydb;
+    private DbHandler mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mydb = new DBHandler();
+        mydb = new DbHandler();
     }
 
     public void onRegister(View view) {
@@ -27,12 +27,12 @@ public class Register extends AppCompatActivity {
         boolean validData = true;
 
         //get strings
-        String stringPassword = (TextView)findViewById(password).getText().toString();
-        String stringConfirmPassword = (TextView)findViewById(comfirmpassword).getText().toString();
-        String stringUsername = (TextView)findViewById(username).getText().toString();
-        String stringEmail = (TextView)findViewById(email).getText().toString();
-        String stringFirst = (TextView)findViewById(firstname).getText().toString();
-        String stringLast = (TextView)findViewById(lastname).getText().toString();
+        String stringPassword = ((TextView)findViewById(R.id.password)).getText().toString();
+        String stringConfirmPassword = ((TextView)findViewById(R.id.comfirmpassword)).getText().toString();
+        String stringUsername = ((TextView)findViewById(R.id.username)).getText().toString();
+        String stringEmail = ((TextView)findViewById(R.id.email)).getText().toString();
+        String stringFirst = ((TextView)findViewById(R.id.firstname)).getText().toString();
+        String stringLast = ((TextView)findViewById(R.id.lastname)).getText().toString();
 
 
         //check if all fields filled
@@ -43,27 +43,27 @@ public class Register extends AppCompatActivity {
                 || stringLast.isEmpty()
                 || stringUsername.isEmpty()) {
             validData = false;
-            (TextView)findViewById(username).setText("please fill in all fields");
+            ((TextView)findViewById(R.id.username)).setText("please fill in all fields");
         }
 
         //check if username taken
         if(mydb.dbSearch("username","userInfoPatients",stringUsername)||
                 mydb.dbSearch("username","userInfoEmployees",stringUsername)){
             validData = false;
-            (TextView)findViewById(username).setText("username taken");
+            ((TextView)findViewById(R.id.username)).setText("username taken");
 
         }
         // check if email taken
         if (mydb.dbSearch("email","userInfoPatients",stringEmail)||
                 mydb.dbSearch("email","userInfoEmployees",stringEmail)){
             validData = false;
-            (TextView)findViewById(email).setText("email taken");
+            ((TextView)findViewById(R.id.email)).setText("email taken");
         }
         //check if password matches confirm password
 
         if (!stringPassword.equals(stringConfirmPassword)){
             validData = false;
-            (TextView)findViewById(confirmpassword).setText("password do not match");
+            ((TextView)findViewById(R.id.comfirmpassword)).setText("password do not match");
         }
 
         if (validData) {
