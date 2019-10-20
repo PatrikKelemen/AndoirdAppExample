@@ -43,7 +43,7 @@ public class Account {
 	}
 	
 	/*
-	*Methode to hash password to SHA-256
+	*Method to hash password to SHA-256
 	*/
 	public String hashPassword(String pass){
 	
