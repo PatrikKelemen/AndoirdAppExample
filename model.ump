@@ -1,12 +1,11 @@
 class Account
 {  
   String password;  
-  byte[] hashPassword;
   String userName;
   String firstName;
   String lastName;
-  public byte[] hashPassword(String){}
-  
+  public String hashPassword(String){}
+ 
   
   
 }
@@ -14,11 +13,12 @@ class Account
 class Admin
 {
     isA Account;
-   Service[] services;
+  Service[] service;
   public void deleteService(Service) {}
   public void createService(Service) {}
   public void deleteUser(Account) {}
   public void deleteClinic(Clinic) {}
+  1 -- * Clinic;
   
 }
 
@@ -27,19 +27,30 @@ class Employee
     isA Account;
   Clinic clinic;
   public void createClinic(String) {}
+  * --* Clinic;
   
+}
+class Patient
+{
+   isA Account;
+  
+}
+
+class Service{
+  float rate;
+  String name;
+  * -- 1 Admin;
+  * -- 1 Clinic;
 }
 
 class Clinic
 {
-    isA Account;
+  ArrayList<Service> service;
   String name; 
-  ArrayList<Service> services;
   int[] openHours;
   int[] closeHours;
   public void addService(Service) {}
   public void removeService(Service) {}
-  public void setHours() {}
 }//$?[End_of_model]$?
 
 namespace -;
@@ -47,20 +58,33 @@ namespace -;
 
 class Account
 {
-  position 335 30 144 124;
+  position 313 22 226 163;
 }
 
 class Admin
 {
-  position 628 291 221 146;
+  position 60 289 221 128;
+  position.association Admin__Clinic 220,128 0,0;
 }
 
 class Employee
 {
-  position 360 294 208 93;
+  position 383 322 208 93;
+  position.association Clinic__Employee 11,93 214,0;
 }
 
 class Clinic
 {
-  position 94 289 230 181;
+  position 355 559 230 147;
+}
+
+class Patient
+{
+  position 674 330 109 58;
+}
+
+class Service
+{
+  position 73 584 109 93;
+  position.association Clinic__Service 110,4 0,90;
 }
