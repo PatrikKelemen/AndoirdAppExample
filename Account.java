@@ -1,26 +1,17 @@
 import java.security.*;
 import java.nio.charset.StandardCharsets;
+
 public class Account {
 	
 	/*
-	* Stores the account's password.
+	* Store's the account's password in SHA-256.
 	*/
 	private String password;
 	
 	/*
-	*Store the account's Hash password
-	*/
-	private byte[] hashPassword;
-	
-	/*
 	* Stores the account's username.
 	*/
-	private String userName;
-
-	/*
-	* Stores the account's profile picture.
-	*/
-	//private image profilePic;
+	private String username;
 
 	/*
 	* Stores the user's first name.
@@ -41,24 +32,32 @@ public class Account {
 	* @param lastName a string with the last name of the user
 	*/
 	public Account(String password, String username, String firstName, String lastName) {
-		this.password = password;
+		this.password = hashPassword(password);
+		if (this.password == null) {
+			throw new IllegalArgumentException("Password could not be stored properly.");
+		}
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		hashPassword = hashPassword(password);
+		
 	}
 	
 	/*
 	*Methode to hash password to SHA-256
 	*/
-	public byte[] hashPassword(String pass){
+	public String hashPassword(String pass){
 	
 		try{
-			
 			//hashing the password to SHA-256 
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] passwordHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-			return passwordHash;
+			byte[] passwordHash = digest.digest(pass.getBytes(StandardCharsets.UTF_8));
+
+			//convertting to hexadecimal
+			String hex = "";
+			for (int i =0; i < passwordHash.length; i++) {
+				hex = hex + String.format("%02x", passwordHash[i]);
+			}
+			return hex;
 		}
 		catch(Exception e){
 			return null;
@@ -73,7 +72,10 @@ public class Account {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = hashPassword(password);
+		if (this.password == null) {
+			throw new IllegalArgumentException("Password could not be stored properly.");
+		}
 	}
 
 	public String getUsername() {
