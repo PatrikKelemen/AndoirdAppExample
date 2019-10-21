@@ -16,7 +16,7 @@ public class DbHandler {
 
     private SQLiteDatabase db = SQLiteDatabase.openDatabase(context.getDatabasePath("appDatabase.db").getPath(), null, SQLiteDatabase.OPEN_READWRITE);
 
-    private boolean dbSearch(String dataColumn, String accountType, String target){
+    public boolean dbSearch(String dataColumn, String accountType, String target){
         return searchAllData(dataColumn, accountType).contains(target);
     }
 
