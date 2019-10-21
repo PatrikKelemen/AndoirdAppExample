@@ -42,7 +42,6 @@ class Service{
 
 class Clinic
 {
-  ArrayList<Service> service;
   String name; 
   int[] openHours;
   int[] closeHours;
