@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class Register extends AppCompatActivity {
@@ -33,6 +34,13 @@ public class Register extends AppCompatActivity {
         String stringEmail = ((TextView)findViewById(R.id.email)).getText().toString();
         String stringFirst = ((TextView)findViewById(R.id.firstname)).getText().toString();
         String stringLast = ((TextView)findViewById(R.id.lastname)).getText().toString();
+        String stringUserType;
+
+        RadioButton patientButton = (RadioButton) findViewById(R.id.patient); // initiate a radio button
+        RadioButton employeeButton = (RadioButton) findViewById(R.id.employee); // initiate a radio button
+
+        Boolean patientState = patientButton.isChecked();
+        Boolean employeeState = employeeButton.isChecked();
 
 
         //check if all fields filled
@@ -41,9 +49,18 @@ public class Register extends AppCompatActivity {
                 || stringEmail.isEmpty()
                 || stringFirst.isEmpty()
                 || stringLast.isEmpty()
-                || stringUsername.isEmpty()) {
+                || stringUsername.isEmpty()
+                || !(patientState || employeeState)) {
             validData = false;
             ((TextView)findViewById(R.id.username)).setText("please fill in all fields");
+        }
+
+        //get usertype
+        if (patientState){
+            stringUserType = "patient";
+        }
+        else (employeeState) {
+            stringUserType = "employee";
         }
 
         //check if username taken
@@ -68,10 +85,11 @@ public class Register extends AppCompatActivity {
 
         if (validData) {
             //create new account here
+            mydb.dbAdd (stringUsername, stringFirst, stringLast, stringEmail, stringPassword, stringUserType);
 
 
 
-            Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
             startActivityForResult(intent, 0);
         }
     }
