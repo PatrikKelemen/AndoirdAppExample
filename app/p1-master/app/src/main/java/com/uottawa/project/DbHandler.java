@@ -4,15 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+//import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import android.database.DatabaseUtils;
+//import java.util.HashMap;
+//import java.util.Hashtable;
+//import android.database.DatabaseUtils;
 
 public class DbHandler {
 
-    private Context context =;
+
+    // Initialize context
+    Context context;
 
     private SQLiteDatabase db = SQLiteDatabase.openDatabase(context.getDatabasePath("appDatabase.db").getPath(), null, SQLiteDatabase.OPEN_READWRITE);
 
