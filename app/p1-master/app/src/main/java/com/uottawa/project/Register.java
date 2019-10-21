@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 public class Register extends AppCompatActivity {
 
     private DbHandler mydb;
@@ -59,13 +62,14 @@ public class Register extends AppCompatActivity {
         if (patientState){
             stringUserType = "patient";
         }
-        else (employeeState) {
+        else  {
             stringUserType = "employee";
         }
 
         //check if username taken
         if(mydb.dbSearch("username","userInfoPatients",stringUsername)||
-                mydb.dbSearch("username","userInfoEmployees",stringUsername)){
+                mydb.dbSearch("username","userInfoEmployees",stringUsername)||
+                stringUsername == "admin"){
             validData = false;
             ((TextView)findViewById(R.id.username)).setText("username taken");
 
@@ -74,17 +78,39 @@ public class Register extends AppCompatActivity {
         if (mydb.dbSearch("email","userInfoPatients",stringEmail)||
                 mydb.dbSearch("email","userInfoEmployees",stringEmail)){
             validData = false;
-            ((TextView)findViewById(R.id.email)).setText("email taken");
+            ((TextView)findViewById(R.id.username)).setText("email taken");
         }
         //check if password matches confirm password
 
         if (!stringPassword.equals(stringConfirmPassword)){
             validData = false;
-            ((TextView)findViewById(R.id.comfirmpassword)).setText("password do not match");
+            ((TextView)findViewById(R.id.username)).setText("password do not match");
         }
 
         if (validData) {
             //create new account here
+            //check password
+            //hashing the password to SHA-256
+            String hex = "";
+            try{
+                //hashing the password to SHA-256
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] passwordHash = digest.digest(stringPassword.getBytes(StandardCharsets.UTF_8));
+
+                //convertting to hexadecimal
+
+                for (int i =0; i < passwordHash.length; i++) {
+                    hex = hex + String.format("%02x", passwordHash[i]);
+                }
+
+            }
+            catch(Exception e){
+                hex = "";
+            }
+
+
+
+
             mydb.dbAdd (stringUsername, stringFirst, stringLast, stringEmail, stringPassword, stringUserType);
 
 

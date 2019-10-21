@@ -12,6 +12,13 @@ public class WelcomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
+
+        Intent welcome = this.getIntent();
+
+        String stringUsername = welcome.getStringExtra("username");
+
+
+
     }
 
     public void onLogout(View view) {
