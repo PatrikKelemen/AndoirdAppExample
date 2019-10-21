@@ -30,7 +30,7 @@ public class Admin extends Account {
 	/**
 	* Creates a new Service that Clinics can offer.
 	*/
-	public void createService(Service service) {
+	public void createService(String service) {
 		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 
