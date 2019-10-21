@@ -13,10 +13,10 @@ class Account
 class Admin
 {
     isA Account;
-  public void deleteService(Service) {}
-  public void createService(Service) {}
-  public void deleteUser(Account) {}
-  public void deleteClinic(Clinic) {}
+  public void deleteService(Service service) {}
+  public void createService(String ) {}
+  public void deleteUser(Account user) {}
+  public void deleteClinic(Clinic clinic) {}
   
 }
 
@@ -24,7 +24,7 @@ class Employee
 {
     isA Account;
   public void createClinic(String) {}
-  * --1 Clinic;
+  * --0..1 Clinic;
   
 }
 class Patient
@@ -37,7 +37,7 @@ class Service{
   float rate;
   String name;
   * -- 1 Admin;
-  * -- 1 Clinic;
+  * -- 0..1 Clinic;
 }
 
 class Clinic
@@ -45,8 +45,9 @@ class Clinic
   String name; 
   int[] openHours;
   int[] closeHours;
-  public void addService(Service) {}
-  public void removeService(Service) {}
+  public void addService(Service service) {}
+  public void removeService(Service service) {}
+  public void addEmployee(Employee employee){}
 }//$?[End_of_model]$?
 
 namespace -;
@@ -65,7 +66,7 @@ class Admin
 
 class Employee
 {
-  position 383 322 208 93;
+  position 382 308 208 76;
   position.association Clinic__Employee 11,93 214,0;
 }
 
