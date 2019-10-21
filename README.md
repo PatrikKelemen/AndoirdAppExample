@@ -27,4 +27,4 @@ You are logged in as [role].
 ```
 - validate all fields in both the login screen and the register screen
 - passwords are stored as SHA-256
-- Bonus: use a database (we used MySQL)
+- Bonus: use a database (we used SQLite)

@@ -71,6 +71,7 @@ public class Clinic {
 
 	/**
 	* Adds the employee to the clinic.
+	* @param employee the employee to be added
 	*/
 	public void addEmployee(Employee employee) {
 		this.employees.add(employee);
