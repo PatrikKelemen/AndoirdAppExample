@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 //import android.database.sqlite.SQLiteOpenHelper;
+import java.io.File;
 import java.util.ArrayList;
 //import java.util.HashMap;
 //import java.util.Hashtable;
@@ -14,9 +15,18 @@ public class DbHandler {
 
 
     // Initialize context
-    Context context;
 
-    private SQLiteDatabase db = SQLiteDatabase.openDatabase(context.getDatabasePath("appDatabase.db").getPath(), null, SQLiteDatabase.OPEN_READWRITE);
+
+
+    private SQLiteDatabase db;
+    public DbHandler (){
+        String filePath = new File("").getAbsolutePath();
+
+        db = SQLiteDatabase.openDatabase(filePath +"appDatabase.db", null, SQLiteDatabase.OPEN_READWRITE);
+
+    }
+
+
 
     public boolean dbSearch(String dataColumn, String accountType, String target){
         return searchAllData(dataColumn, accountType).contains(target);

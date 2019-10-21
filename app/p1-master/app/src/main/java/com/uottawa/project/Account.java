@@ -38,7 +38,7 @@ public class Account {
      * @param firstName a string with the first name of the user
      * @param lastName a string with the last name of the user
      */
-    public Account(String password, String username, String firstName, String lastName, String email) {
+    public Account(String password, String username, String firstName, String lastName) {
         this.password = hashPassword(password);
         if (this.password == null) {
             throw new IllegalArgumentException("Password could not be stored properly.");
@@ -46,7 +46,7 @@ public class Account {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+
 
     }
 
