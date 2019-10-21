@@ -12,24 +12,36 @@ import android.database.DatabaseUtils;
 
 public class DbHandler {
 
-    SQLiteDatabase db = new SQLiteDatabase.openDatabase(context.getDatabasePath(appDatabase.db).getPath(), null, SQLiteDatabase.OPEN_READWRITE);
+    private Context context =;
 
-    public boolean dbSearch(String dataColumn, String accountType, String target){
+    private SQLiteDatabase db = SQLiteDatabase.openDatabase(context.getDatabasePath("appDatabase.db").getPath(), null, SQLiteDatabase.OPEN_READWRITE);
+
+    private boolean dbSearch(String dataColumn, String accountType, String target){
         return searchAllData(dataColumn, accountType).contains(target);
     }
 
     public void dbAdd (String username, String firstName, String lastName, String email, String password, String userType){
         ContentValues input = new ContentValues();
-        this.input.put("name", username);
-        this.input.put("password", password);
-        this.input.put("nameFirst", firstName);
-        this.input.put("nameLast", lastName);
-        this.input.put("email", email);
+        input.put("name", username);
+        input.put("password", password);
+        input.put("nameFirst", firstName);
+        input.put("nameLast", lastName);
+        input.put("email", email);
         db.insert(userType, null, input);
     }
 
-    public void matchPassword (String name, String pass){
-        // Add code for searching for password related to username
+    public String matchData (String type, String name, String column ){
+        ArrayList<String> usernames = searchAllData("name", type);
+        ArrayList<String> targetColumn = searchAllData(column, type);
+
+        int found = usernames.indexOf(name);
+        if (found == -1){
+            return "";
+        }
+        else{
+            return targetColumn.get(found);
+        }
+
     }
 
     public ArrayList<String> searchAllData(String column, String profile) {
