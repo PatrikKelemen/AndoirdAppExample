@@ -13,21 +13,18 @@ class Account
 class Admin
 {
     isA Account;
-  Service[] service;
   public void deleteService(Service) {}
   public void createService(Service) {}
   public void deleteUser(Account) {}
   public void deleteClinic(Clinic) {}
-  1 -- * Clinic;
   
 }
 
 class Employee
 {
     isA Account;
-  Clinic clinic;
   public void createClinic(String) {}
-  * --* Clinic;
+  * --1 Clinic;
   
 }
 class Patient
@@ -45,7 +42,6 @@ class Service{
 
 class Clinic
 {
-  ArrayList<Service> service;
   String name; 
   int[] openHours;
   int[] closeHours;
