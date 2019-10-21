@@ -25,6 +25,11 @@ public class Account {
      */
     private String lastName;
 
+    /*
+     * Stores the user's email.
+     */
+    private String email;
+
 
     /**
      * Creates a new Account.
@@ -33,7 +38,7 @@ public class Account {
      * @param firstName a string with the first name of the user
      * @param lastName a string with the last name of the user
      */
-    public Account(String password, String username, String firstName, String lastName) {
+    public Account(String password, String username, String firstName, String lastName, String email) {
         this.password = hashPassword(password);
         if (this.password == null) {
             throw new IllegalArgumentException("Password could not be stored properly.");
@@ -41,6 +46,7 @@ public class Account {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
 
     }
 
