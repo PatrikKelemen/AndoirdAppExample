@@ -13,6 +13,11 @@ public class Clinic {
 	private ArrayList<Service> services;
 
 	/*
+	* The arraylist of employees who work at the clinic.
+	*/ 
+	private ArrayList<Employee> employees;
+
+	/*
 	* The array of hours the Clinic opens at.
 	*/
 	private int[] openHours;
@@ -62,5 +67,12 @@ public class Clinic {
 	*/
 	public void setHours() {
 		throw new UnsupportedOperationException("Not implemented yet.");
+	}
+
+	/**
+	* Adds the employee to the clinic.
+	*/
+	public void addEmployee(Employee employee) {
+		this.employees.add(employee);
 	}
 }
