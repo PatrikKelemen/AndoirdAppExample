@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.TextView;
 
 public class WelcomeScreen extends AppCompatActivity {
+
+    private DbHandler mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +19,10 @@ public class WelcomeScreen extends AppCompatActivity {
         Intent welcome = this.getIntent();
 
         String stringUsername = welcome.getStringExtra("username");
-
-
+        String accountType = welcome.getStringExtra("accountType");
+        mydb = new DbHandler();
+        String dbName = mydb.matchData (accountType, stringUsername, "nameFirst" );
+        ((TextView)findViewById(R.id.welcomeMsg)).setText(dbName);
 
     }
 

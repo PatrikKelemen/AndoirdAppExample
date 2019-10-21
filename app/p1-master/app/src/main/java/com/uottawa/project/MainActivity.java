@@ -68,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        String dbpassword = mydb.matchData (accountType, stringUsername, "password" );
 
 
 
-
-        if (hex == ""){
+        if (hex != dbpassword){
             ((TextView)findViewById(R.id.password)).setText("username or password is wrong");
         }
 
