@@ -10,6 +10,11 @@ import java.util.ArrayList;
 //import java.util.HashMap;
 //import java.util.Hashtable;
 //import android.database.DatabaseUtils;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DbHandler {
 
@@ -32,19 +37,11 @@ public class DbHandler {
         return searchAllData(dataColumn, accountType).contains(target);
     }
 
-    public void dbAdd (String username, String firstName, String lastName, String email, String password, String userType){
-        ContentValues input = new ContentValues();
-        input.put("name", username);
-        input.put("password", password);
-        input.put("nameFirst", firstName);
-        input.put("nameLast", lastName);
-        input.put("email", email);
-        db.insert(userType, null, input);
+    public void dbAdd (String username, String firstName, String lastName, String email, String password, String userType) {
     }
 
     public String matchData (String type, String name, String column ){
-        ArrayList<String> usernames = searchAllData("name", type);
-        ArrayList<String> targetColumn = searchAllData(column, type);
+        ArrayList<Account> userData;
 
         int found = usernames.indexOf(name);
         if (found == -1){
