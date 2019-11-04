@@ -42,9 +42,40 @@ public class DbHandler {
 
         }
 
+    public Account getData(String username){
 
 
-    private void add(Account account) {
+            for (int i = 0; i< users.size(); i++){
+                if (users.get(i).getUsername().equals(username)){
+                    return users.get(i);
+                }
+            }
+
+
+        return null;
+    }
+
+    public boolean exists(String data, String dataToSerach){
+
+        if (dataToSerach.equals("Username")){
+            for (int i = 0; i< users.size(); i++){
+                if (users.get(i).getUsername().equals(data)){
+                    return true;
+                }
+            }
+        }
+        else if (dataToSerach.equals("Email")){
+            for (int i = 0; i< users.size(); i++){
+                if (users.get(i).getEmail().equals(data)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public void add(Account account) {
 
 
         String id = database.push().getKey();

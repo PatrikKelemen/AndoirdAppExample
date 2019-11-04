@@ -67,16 +67,14 @@ public class Register extends AppCompatActivity {
         }
 
         //check if username taken
-        if(mydb.dbSearch("username","userInfoPatients",stringUsername)||
-                mydb.dbSearch("username","userInfoEmployees",stringUsername)||
+        if(mydb.exists(stringUsername, "Username")||
                 stringUsername == "admin"){
             validData = false;
             ((TextView)findViewById(R.id.username)).setText("username taken");
 
         }
         // check if email taken
-        if (mydb.dbSearch("email","userInfoPatients",stringEmail)||
-                mydb.dbSearch("email","userInfoEmployees",stringEmail)){
+        if (mydb.exists(stringEmail, "Email")){
             validData = false;
             ((TextView)findViewById(R.id.username)).setText("email taken");
         }
@@ -108,10 +106,10 @@ public class Register extends AppCompatActivity {
                 hex = "";
             }
 
+            Account newAccount = new Account(stringPassword, stringUsername, stringFirst, stringLast);
 
 
-
-            mydb.dbAdd (stringUsername, stringFirst, stringLast, stringEmail, stringPassword, stringUserType);
+            mydb.add (newAccount);
 
 
 

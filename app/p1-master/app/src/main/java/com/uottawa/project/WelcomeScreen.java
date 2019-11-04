@@ -21,7 +21,8 @@ public class WelcomeScreen extends AppCompatActivity {
         String stringUsername = welcome.getStringExtra("username");
         String accountType = welcome.getStringExtra("accountType");
         mydb = new DbHandler();
-        String dbName = mydb.matchData (accountType, stringUsername, "nameFirst" );
+        Account dbUser = mydb.getData (stringUsername);
+        String dbName = dbUser.getFirstName();
         ((TextView)findViewById(R.id.welcomeMsg)).setText(dbName);
 
     }

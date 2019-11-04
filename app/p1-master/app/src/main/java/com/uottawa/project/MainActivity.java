@@ -33,16 +33,8 @@ public class MainActivity extends AppCompatActivity {
         String stringPassword = ((TextView)findViewById(R.id.password)).getText().toString();
         boolean validData = true;
 
-        if (stringUsername == "admin"){
-            accountType = "ADMIN";
-        }
+        if (mydb.exists(stringUsername, "Username")){
 
-        else if (mydb.dbSearch("username","userInfoEmployees",stringUsername)) {
-            accountType = "userInfoEmployees";
-        }
-
-        else if (mydb.dbSearch("username","userInfoPatients",stringUsername)){
-            accountType = "userInfoPatients";
         }
 
         else{
@@ -68,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        String dbpassword = mydb.matchData (accountType, stringUsername, "password" );
-
+        Account dbUser = mydb.getData (stringUsername);
+        String dbpassword = dbUser.getPassword();
 
 
         if (hex != dbpassword){
