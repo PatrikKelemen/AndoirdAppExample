@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         String dbpassword = dbUser.getPassword();
 
 
-        if (hex != dbpassword){
+        if (!hex.equals( dbpassword)){
             ((TextView)findViewById(R.id.password)).setText("username or password is wrong");
         }
 

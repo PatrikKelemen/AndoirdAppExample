@@ -21,8 +21,9 @@ public class DbHandler {
 
 
     public DbHandler (){
-        database = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance().getReference("users");
         database.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange (DataSnapshot dataSnapshot){
                 users.clear();
@@ -41,6 +42,7 @@ public class DbHandler {
         });
 
         }
+
 
     public Account getData(String username){
 
