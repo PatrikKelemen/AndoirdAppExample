@@ -7,6 +7,7 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.TextView;
 
+
 public class WelcomeScreen extends AppCompatActivity {
 
     private DbHandler mydb;
@@ -21,8 +22,7 @@ public class WelcomeScreen extends AppCompatActivity {
         String stringUsername = welcome.getStringExtra("username");
         String accountType = welcome.getStringExtra("accountType");
         mydb = new DbHandler();
-        Account dbUser = mydb.getData (stringUsername);
-        String dbName = dbUser.getFirstName();
+        String dbName = stringUsername;
         ((TextView)findViewById(R.id.welcomeMsg)).setText(dbName);
 
     }

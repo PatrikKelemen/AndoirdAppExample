@@ -28,12 +28,12 @@ public class Account {
     /*
      * Stores the user's email.
      */
-    private String email;
+    private String email = "";
 
 
     /**
      * Creates a new Account.
-     * @param password a string with the password
+     * @paraAccount newAccount = new Account(stringPassword, stringUsername, stringFirst, stringLast);m password a string with the password
      * @param username a string with the username
      * @param firstName a string with the first name of the user
      * @param lastName a string with the last name of the user

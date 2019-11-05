@@ -14,37 +14,15 @@ import com.google.firebase.database.ValueEventListener;
 public class DbHandler {
 
 
-    // Initialize context
-    DatabaseReference database;
-    List<Account> users;
+
 
 
 
     public DbHandler (){
-        database = FirebaseDatabase.getInstance().getReference("users");
-        database.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange (DataSnapshot dataSnapshot){
-                users.clear();
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    Account user = postSnapshot.getValue(Account.class);
-                    users.add(user);
                 }
 
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError){
-
-            }
-        });
-
-        }
-
-
-    public Account getData(String username){
+    public Account getData(String username, List<Account> users){
 
 
             for (int i = 0; i< users.size(); i++){
@@ -57,7 +35,7 @@ public class DbHandler {
         return null;
     }
 
-    public boolean exists(String data, String dataToSerach){
+    public boolean exists(String data, String dataToSerach,List<Account> users){
 
         if (dataToSerach.equals("Username")){
             for (int i = 0; i< users.size(); i++){
@@ -77,7 +55,7 @@ public class DbHandler {
     }
 
 
-    public void add(Account account) {
+    public void add(Account account, DatabaseReference database ) {
 
 
         String id = database.push().getKey();
@@ -85,5 +63,16 @@ public class DbHandler {
 
 
         database.child(id).setValue(account);
+    }
+
+    public void test(DatabaseReference database ) {
+
+
+
+
+        Account newAccount = new Account("pass","username","first","last");
+        this.add(newAccount,database);
+
+
     }
 }
