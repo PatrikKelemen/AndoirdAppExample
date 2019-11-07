@@ -28,8 +28,12 @@ public class Account {
     /*
      * Stores the user's email.
      */
-    private String email = "";
+    private String email ;
 
+
+    public Account() {
+
+    }
 
     /**
      * Creates a new Account.
@@ -38,6 +42,9 @@ public class Account {
      * @param firstName a string with the first name of the user
      * @param lastName a string with the last name of the user
      */
+
+
+
     public Account(String password, String username, String firstName, String lastName) {
         this.password = hashPassword(password);
         if (this.password == null) {
@@ -78,7 +85,6 @@ public class Account {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = hashPassword(password);
         if (this.password == null) {
@@ -86,12 +92,15 @@ public class Account {
         }
     }
 
+
     public String getUsername() {
         return username;
     }
     public String getEmail() {
         return email;
     }
+
+    public void setEmail(String email){this.email = email;}
 
     public void setUsername(String username) {
         this.username = username;

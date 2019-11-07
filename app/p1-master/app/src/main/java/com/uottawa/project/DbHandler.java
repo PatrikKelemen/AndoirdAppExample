@@ -22,6 +22,7 @@ public class DbHandler {
                 }
 
 
+
     public Account getData(String username, List<Account> users){
 
 
@@ -36,7 +37,9 @@ public class DbHandler {
     }
 
     public boolean exists(String data, String dataToSerach,List<Account> users){
-
+        if(data == null){
+            return (false);
+        }
         if (dataToSerach.equals("Username")){
             for (int i = 0; i< users.size(); i++){
                 if (users.get(i).getUsername().equals(data)){
@@ -46,7 +49,7 @@ public class DbHandler {
         }
         else if (dataToSerach.equals("Email")){
             for (int i = 0; i< users.size(); i++){
-                if (users.get(i).getEmail().equals(data)){
+                if (users.get(i).getEmail() != null && users.get(i).getEmail().equals(data)){
                     return true;
                 }
             }

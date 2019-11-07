@@ -32,16 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
 
-        mydb.test(database);
     }
 
-    /*@Override
+    @Override
     protected void onStart() {
         super.onStart();
         database.addValueEventListener(new ValueEventListener() {
 
             @Override
-            public void onDataChange (DataSnapshot dataSnapshot){
+            public void onDataChange(DataSnapshot dataSnapshot){
                 users.clear();
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
@@ -56,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }*/
+
+
+    }
 
     public void onRegister(View view) {
         Intent intent = new Intent(getApplicationContext(), Register.class);
@@ -98,13 +99,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        //Account dbUser = mydb.getData (stringUsername, users);
-        //String dbpassword = dbUser.getPassword();
+        if (validData) {
+            Account dbUser = mydb.getData(stringUsername, users);
+            String dbpassword = dbUser.getPassword();
+            if (!hex.equals( dbpassword)){
+                //((TextView)findViewById(R.id.password)).setText("username or password is wrong"); (replace with toast)
+                validData = false;
+            }
+        }
 
 
-        //if (!hex.equals( dbpassword)){
-            //((TextView)findViewById(R.id.password)).setText("username or password is wrong");
-        //}
+
 
 
         if (validData){

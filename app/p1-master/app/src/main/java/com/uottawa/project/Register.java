@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Register extends AppCompatActivity {
@@ -29,13 +30,20 @@ public class Register extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        users = new ArrayList<>();
         mydb = new DbHandler();
         database = FirebaseDatabase.getInstance().getReference("users");
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         database.addValueEventListener(new ValueEventListener() {
 
             @Override
-            public void onDataChange (DataSnapshot dataSnapshot){
+            public void onDataChange(DataSnapshot dataSnapshot){
                 users.clear();
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
@@ -117,23 +125,7 @@ public class Register extends AppCompatActivity {
         if (validData) {
             //create new account here
             //check password
-            //hashing the password to SHA-256
-            String hex = "";
-            try{
-                //hashing the password to SHA-256
-                MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                byte[] passwordHash = digest.digest(stringPassword.getBytes(StandardCharsets.UTF_8));
-
-                //convertting to hexadecimal
-
-                for (int i =0; i < passwordHash.length; i++) {
-                    hex = hex + String.format("%02x", passwordHash[i]);
-                }
-
-            }
-            catch(Exception e){
-                hex = "";
-            }
+            
 
             Account newAccount = new Account(stringPassword, stringUsername, stringFirst, stringLast);
 
