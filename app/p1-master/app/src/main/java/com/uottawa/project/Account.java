@@ -46,10 +46,7 @@ public class Account {
 
 
     public Account(String password, String username, String firstName, String lastName) {
-        this.password = hashPassword(password);
-        if (this.password == null) {
-            throw new IllegalArgumentException("Password could not be stored properly.");
-        }
+        this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -86,10 +83,8 @@ public class Account {
         return password;
     }
     public void setPassword(String password) {
-        this.password = hashPassword(password);
-        if (this.password == null) {
-            throw new IllegalArgumentException("Password could not be stored properly.");
-        }
+        this.password = password;
+
     }
 
 

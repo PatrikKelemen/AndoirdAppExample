@@ -125,9 +125,24 @@ public class Register extends AppCompatActivity {
         if (validData) {
             //create new account here
             //check password
-            
+           String hex = "";
+            try{
+                //hashing the password to SHA-256
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] passwordHash = digest.digest(stringPassword.getBytes(StandardCharsets.UTF_8));
 
-            Account newAccount = new Account(stringPassword, stringUsername, stringFirst, stringLast);
+                //convertting to hexadecimal
+
+                for (int i =0; i < passwordHash.length; i++) {
+                    hex = hex + String.format("%02x", passwordHash[i]);
+                }
+
+            }
+            catch(Exception e){
+                hex = "";
+            }
+
+            Account newAccount = new Account(hex, stringUsername, stringFirst, stringLast);
 
 
             mydb.add (newAccount,database);
