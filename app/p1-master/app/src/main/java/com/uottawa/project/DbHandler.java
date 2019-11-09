@@ -13,25 +13,19 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DbHandler {
 
-
-
-
-
-
     public DbHandler (){
                 }
 
-
-
     public Account getData(String username, List<Account> users){
-
+            //These two lines showed up in the merge but they aren't in my copy, not sure if they are supposed to be here
+            //@Override
+            //public void onCancelled(DatabaseError databaseError){
 
             for (int i = 0; i< users.size(); i++){
                 if (users.get(i).getUsername().equals(username)){
                     return users.get(i);
                 }
             }
-
 
         return null;
     }
@@ -59,23 +53,13 @@ public class DbHandler {
 
 
     public void add(Account account, DatabaseReference database ) {
-
-
         String id = database.push().getKey();
-
-
-
         database.child(id).setValue(account);
     }
 
+
     public void test(DatabaseReference database ) {
-
-
-
-
         Account newAccount = new Account("pass","username","first","last");
         this.add(newAccount,database);
-
-
     }
 }
