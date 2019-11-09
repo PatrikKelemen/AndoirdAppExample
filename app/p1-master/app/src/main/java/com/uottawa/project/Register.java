@@ -142,14 +142,26 @@ public class Register extends AppCompatActivity {
                 hex = "";
             }
 
-            Account newAccount = new Account(hex, stringUsername, stringFirst, stringLast);
-
+            Account newAccount;
+            if (stringUserType.equals("employee")){
+                newAccount = new Employee(hex, stringUsername, stringFirst, stringLast, stringEmail);
+            } else {
+                newAccount = new Patient(hex, stringUsername, stringFirst, stringLast, stringEmail);
+            }
 
             mydb.add (newAccount,database);
 
+            Intent intent;
+            if (newAccount.getClass().equals(Employee.class)) {
+                intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                intent.putExtra("accountType",stringUserType);
+                //Patient (or is an error, the least amount of damage can be done with a Patient Account)
+            } else {
+                intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                intent.putExtra("accountType",stringUserType);
+            }
 
-
-                Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+            intent.putExtra("username",stringUsername);
             startActivityForResult(intent, 0);
         }
     }

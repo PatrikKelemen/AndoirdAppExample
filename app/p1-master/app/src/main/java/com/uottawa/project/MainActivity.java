@@ -103,21 +103,39 @@ public class MainActivity extends AppCompatActivity {
             Account dbUser = mydb.getData(stringUsername, users);
             String dbpassword = dbUser.getPassword();
             System.out.print(dbpassword);
+
             if (!hex.equals( dbpassword)){
                 //((TextView)findViewById(R.id.password)).setText("username or password is wrong"); (replace with toast)
                 validData = false;
+
+            } else {
+                Intent intent;
+                //Admin user
+                if (dbUser.getClass().equals(Admin.class)) {
+                    intent = new Intent(getApplicationContext(), AdminScreen.class);
+
+                //Employee user
+                } else if (dbUser.getClass().equals(Employee.class)) {
+                    intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                    intent.putExtra("accountType",accountType);
+                //Patient (or is an error, the least amount of damage can be done with a Patient Account)
+                } else {
+                    intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                    intent.putExtra("accountType",accountType);
+                }
+
+                intent.putExtra("username",stringUsername);
+                startActivityForResult(intent, 0);
             }
         }
 
-
-
-
-
-        if (validData){
+        /*if (validData){
+            Intent intent;
+            if (dbUser.getClass().equals(Admin.class) )
             Intent intent = new Intent(getApplicationContext(), WelcomeScreen.class);
             intent.putExtra("username",stringUsername);
             intent.putExtra("accoutType",accountType);
             startActivityForResult(intent, 0);
-        }
+        }*/
     }
 }

@@ -59,7 +59,7 @@ public class DbHandler {
 
 
     public void test(DatabaseReference database ) {
-        Account newAccount = new Account("pass","username","first","last");
+        Account newAccount = new Account("pass","username","first","last", "email");
         this.add(newAccount,database);
     }
 }

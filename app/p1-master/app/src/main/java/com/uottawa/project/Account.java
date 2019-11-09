@@ -45,13 +45,12 @@ public class Account {
 
 
 
-    public Account(String password, String username, String firstName, String lastName) {
+    public Account(String password, String username, String firstName, String lastName, String email) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
-
-
+        this.email = email;
     }
 
     /*
