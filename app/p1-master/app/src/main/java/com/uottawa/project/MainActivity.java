@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
+        mydb.addAdmin(database,users);
+
         //Check that the password and username are valid here
         String accountType ="";
         String stringUsername = ((TextView)findViewById(R.id.username)).getText().toString();
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         boolean validData = true;
 
         if (mydb.exists(stringUsername, "Username",users)){
-            System.out.println("exists");
+            //(add toast here)
         }
 
         else{
@@ -97,12 +99,12 @@ public class MainActivity extends AppCompatActivity {
         catch(Exception e){
             hex = "";
         }
-        System.out.println(hex);
+
 
         if (validData) {
             Account dbUser = mydb.getData(stringUsername, users);
             String dbpassword = dbUser.getPassword();
-            System.out.print(dbpassword);
+
 
             if (!hex.equals( dbpassword)){
                 //((TextView)findViewById(R.id.password)).setText("username or password is wrong"); (replace with toast)
@@ -111,17 +113,18 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Intent intent;
                 //Admin user
+                System.out.println((dbUser.getClass()));
                 if (dbUser.getClass().equals(Admin.class)) {
                     intent = new Intent(getApplicationContext(), AdminScreen.class);
 
                 //Employee user
                 } else if (dbUser.getClass().equals(Employee.class)) {
                     intent = new Intent(getApplicationContext(), WelcomeScreen.class);
-                    intent.putExtra("accountType",accountType);
+                    intent.putExtra("accountType","Employee");
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
                 } else {
                     intent = new Intent(getApplicationContext(), WelcomeScreen.class);
-                    intent.putExtra("accountType",accountType);
+                    intent.putExtra("accountType","Patient");
                 }
 
                 intent.putExtra("username",stringUsername);

@@ -58,8 +58,11 @@ public class DbHandler {
     }
 
 
-    public void test(DatabaseReference database ) {
-        Account newAccount = new Account("pass","username","first","last", "email");
-        this.add(newAccount,database);
+    public void addAdmin(DatabaseReference database,List<Account> users ) {
+
+        if (!exists("admin", "Username",users)) {
+            Account newAccount = new Admin("36e0d001bb89f979bf685399fea558db3c269155a02c77416fa06d79c03f3d39", "admin", "ADMIN", "ADMIN", "no@noo.ca");
+            this.add(newAccount, database);
+        }
     }
 }
