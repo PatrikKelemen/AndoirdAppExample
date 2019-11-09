@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
-
+        
     }
 
     @Override
