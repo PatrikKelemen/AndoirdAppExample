@@ -8,19 +8,56 @@ import android.content.Intent;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Register extends AppCompatActivity {
 
     private DbHandler mydb;
+    DatabaseReference database;
+    List<Account> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        users = new ArrayList<>();
         mydb = new DbHandler();
+        database = FirebaseDatabase.getInstance().getReference("users");
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        database.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot){
+                users.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Account user = postSnapshot.getValue(Account.class);
+                    users.add(user);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
     }
 
     public void onRegister(View view) {
@@ -67,16 +104,14 @@ public class Register extends AppCompatActivity {
         }
 
         //check if username taken
-        if(mydb.dbSearch("username","userInfoPatients",stringUsername)||
-                mydb.dbSearch("username","userInfoEmployees",stringUsername)||
+        if(mydb.exists(stringUsername, "Username",users)||
                 stringUsername == "admin"){
             validData = false;
             ((TextView)findViewById(R.id.username)).setText("username taken");
 
         }
         // check if email taken
-        if (mydb.dbSearch("email","userInfoPatients",stringEmail)||
-                mydb.dbSearch("email","userInfoEmployees",stringEmail)){
+        if (mydb.exists(stringEmail, "Email",users)){
             validData = false;
             ((TextView)findViewById(R.id.username)).setText("email taken");
         }
@@ -90,8 +125,7 @@ public class Register extends AppCompatActivity {
         if (validData) {
             //create new account here
             //check password
-            //hashing the password to SHA-256
-            String hex = "";
+           String hex = "";
             try{
                 //hashing the password to SHA-256
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -108,10 +142,10 @@ public class Register extends AppCompatActivity {
                 hex = "";
             }
 
+            Account newAccount = new Account(hex, stringUsername, stringFirst, stringLast);
 
 
-
-            mydb.dbAdd (stringUsername, stringFirst, stringLast, stringEmail, stringPassword, stringUserType);
+            mydb.add (newAccount,database);
 
 
 
