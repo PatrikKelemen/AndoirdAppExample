@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,7 +68,7 @@ public class Register extends AppCompatActivity {
 
         //Check that data is valid here
         boolean validData = true;
-
+        Button b;
         //get strings
         String stringPassword = ((TextView)findViewById(R.id.password)).getText().toString();
         String stringConfirmPassword = ((TextView)findViewById(R.id.comfirmpassword)).getText().toString();
@@ -107,19 +109,40 @@ public class Register extends AppCompatActivity {
         if(mydb.exists(stringUsername, "Username",users)||
                 stringUsername == "admin"){
             validData = false;
-            ((TextView)findViewById(R.id.username)).setText("username taken");
+            b=(Button)findViewById(R.id.register);
+            b.setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         Toast.makeText(getApplicationContext(), "Username taken", Toast.LENGTH_LONG).show();
+                                     }
+                                 }
+            );
 
         }
         // check if email taken
         if (mydb.exists(stringEmail, "Email",users)){
             validData = false;
-            ((TextView)findViewById(R.id.username)).setText("email taken");
+            b=(Button)findViewById(R.id.register);
+            b.setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_LONG).show();
+                                     }
+                                 }
+            );
         }
         //check if password matches confirm password
 
         if (!stringPassword.equals(stringConfirmPassword)){
             validData = false;
-            ((TextView)findViewById(R.id.username)).setText("password do not match");
+            b=(Button)findViewById(R.id.register);
+            b.setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         Toast.makeText(getApplicationContext(),"password do not match", Toast.LENGTH_LONG).show();
+                                     }
+                                 }
+            );
         }
 
         if (validData) {

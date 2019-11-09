@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.security.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     // Initialize context
+    protected Button b;
+    String s= "Username/password is incorrect";
     DatabaseReference database;
     List<Account> users;
     private DbHandler mydb = new DbHandler();
@@ -28,10 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         users = new ArrayList<>();
-
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
-        
     }
 
     @Override
@@ -76,8 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (mydb.exists(stringUsername, "Username",users)){
             //(add toast here)
+            b=(Button)findViewById(R.id.login);
+            b.setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         Toast.makeText(getApplicationContext(), "You are successfully logged in!", Toast.LENGTH_LONG).show();
+                                     }
+                                 }
+            );
         }
-
         else{
             validData = false;
         }
