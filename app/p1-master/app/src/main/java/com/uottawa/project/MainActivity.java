@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         boolean validData = true;
 
         if (mydb.exists(stringUsername, "Username",users)){
-
+            System.out.println("exists");
         }
 
         else{
@@ -97,11 +97,12 @@ public class MainActivity extends AppCompatActivity {
         catch(Exception e){
             hex = "";
         }
-
+        System.out.println(hex);
 
         if (validData) {
             Account dbUser = mydb.getData(stringUsername, users);
             String dbpassword = dbUser.getPassword();
+            System.out.print(dbpassword);
             if (!hex.equals( dbpassword)){
                 //((TextView)findViewById(R.id.password)).setText("username or password is wrong"); (replace with toast)
                 validData = false;
