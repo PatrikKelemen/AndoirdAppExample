@@ -24,6 +24,11 @@ public class AdminScreen extends AppCompatActivity {
         ((TextView)findViewById(R.id.welcomeMsg)).setText("Welcome "+dbName+". You are logged in as Admin.");
     }
 
+    public void onManageServices (View view) {
+        Intent intent = new Intent(getApplicationContext(), Register.class);
+        startActivityForResult(intent,0);
+    }
+
     public void onLogout(View view) {
         Intent returnIntent = new Intent();
         //We might use this to send stuff to the next page??
