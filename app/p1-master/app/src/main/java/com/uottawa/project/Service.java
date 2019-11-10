@@ -12,6 +12,8 @@ public class Service {
      */
     private String name;
 
+    // Role of the employee who performs the service
+    private String role;
 
     //More will be added here when services are implemented.
 
@@ -20,11 +22,14 @@ public class Service {
      * Creates a new Service that a Clinic can offer.
      * @param rate a float with the price of the service in canadian dollars
      * @param name a string with the name of the service
+     * @param role a string with the employee role who performs the service
      */
     public Service(float rate, String name) {
         this.rate = rate;
         this.name = name;
     }
+
+    public Service(){}
 
     //Getters & Setters
     public float getRate() {
