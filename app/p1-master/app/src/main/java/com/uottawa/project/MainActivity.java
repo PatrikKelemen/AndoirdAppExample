@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.security.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
 
     // Initialize context
+    protected Button b;
+    String s= "Username/password is incorrect";
     DatabaseReference database;
     List<Account> users;
     private DbHandler mydb = new DbHandler();
@@ -28,10 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         users = new ArrayList<>();
-
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
-        
     }
 
     @Override
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
+        mydb.addAdmin(database,users);
+
         //Check that the password and username are valid here
         String accountType ="";
         String stringUsername = ((TextView)findViewById(R.id.username)).getText().toString();
@@ -73,9 +78,16 @@ public class MainActivity extends AppCompatActivity {
         boolean validData = true;
 
         if (mydb.exists(stringUsername, "Username",users)){
-            System.out.println("exists");
+            //(add toast here)
+            b=(Button)findViewById(R.id.login);
+            b.setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         Toast.makeText(getApplicationContext(), "You are successfully logged in!", Toast.LENGTH_LONG).show();
+                                     }
+                                 }
+            );
         }
-
         else{
             validData = false;
         }
@@ -97,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
         catch(Exception e){
             hex = "";
         }
-        System.out.println(hex);
+
 
         if (validData) {
             Account dbUser = mydb.getData(stringUsername, users);
             String dbpassword = dbUser.getPassword();
-            System.out.print(dbpassword);
+
 
             if (!hex.equals( dbpassword)){
                 //((TextView)findViewById(R.id.password)).setText("username or password is wrong"); (replace with toast)
@@ -111,17 +123,18 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Intent intent;
                 //Admin user
+                System.out.println((dbUser.getClass()));
                 if (dbUser.getClass().equals(Admin.class)) {
                     intent = new Intent(getApplicationContext(), AdminScreen.class);
 
                 //Employee user
                 } else if (dbUser.getClass().equals(Employee.class)) {
                     intent = new Intent(getApplicationContext(), WelcomeScreen.class);
-                    intent.putExtra("accountType",accountType);
+                    intent.putExtra("accountType","Employee");
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
                 } else {
                     intent = new Intent(getApplicationContext(), WelcomeScreen.class);
-                    intent.putExtra("accountType",accountType);
+                    intent.putExtra("accountType","Patient");
                 }
 
                 intent.putExtra("username",stringUsername);
