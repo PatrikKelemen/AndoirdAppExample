@@ -1,11 +1,9 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
-      - image: alpine:3.7
+      - image: cicleci/node:4.8.2
     steps:
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+      - checkout
+      - run: echo 'Hello World!'
+    
