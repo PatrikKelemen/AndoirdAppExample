@@ -37,12 +37,50 @@ public class ManageServices extends AppCompatActivity {
         listViewProducts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Product service = services.get(i);
+                Service service = services.get(i);
                 showUpdateDeleteDialog(service.getId(), service.getName(), service.getRate(), service.getRole());
                 return true;
             }
         });
 
+    }
+
+    private void showUpdateDeleteDialog(final String serviceId, String serviceName, float serviceRate, String serviceRole) {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.update_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName);
+        final EditText editTextRate  = (EditText) dialogView.findViewById(R.id.editTextPrice);
+        final EditText editTextRole = (EditText) dialogView.findViewById(R.id.editTextRole);
+        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateProduct);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProduct);
+
+        dialogBuilder.setTitle(serviceName);
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = editTextName.getText().toString().trim();
+                double price = Double.parseDouble(String.valueOf(editTextPrice.getText().toString()));
+                if (!TextUtils.isEmpty(name)) {
+                    updateService(serviceId, serviceName, serviceRate, serviceRole);
+                    b.dismiss();
+                }
+            }
+        });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteService(serviceId);
+                b.dismiss();
+            }
+        });
     }
 
 
