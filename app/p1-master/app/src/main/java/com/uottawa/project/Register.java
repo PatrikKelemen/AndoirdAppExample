@@ -94,55 +94,38 @@ public class Register extends AppCompatActivity {
                 || stringUsername.isEmpty()
                 || !(patientState || employeeState)) {
             validData = false;
-            ((TextView)findViewById(R.id.username)).setText("please fill in all fields");
+            Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
         }
 
         //get usertype
         if (patientState){
-            stringUserType = "patient";
+            stringUserType = "Patient";
         }
         else  {
-            stringUserType = "employee";
+            stringUserType = "Employee";
         }
 
         //check if username taken
         if(mydb.exists(stringUsername, "Username",users)||
                 stringUsername == "admin"){
             validData = false;
-            b=(Button)findViewById(R.id.register);
-            b.setOnClickListener(new View.OnClickListener() {
-                                     @Override
-                                     public void onClick(View v) {
-                                         Toast.makeText(getApplicationContext(), "Username taken", Toast.LENGTH_LONG).show();
-                                     }
-                                 }
-            );
+
+             Toast.makeText(getApplicationContext(), "Username taken", Toast.LENGTH_LONG).show();
+
 
         }
         // check if email taken
         if (mydb.exists(stringEmail, "Email",users)){
             validData = false;
-            b=(Button)findViewById(R.id.register);
-            b.setOnClickListener(new View.OnClickListener() {
-                                     @Override
-                                     public void onClick(View v) {
-                                         Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_LONG).show();
-                                     }
-                                 }
-            );
+            Toast.makeText(getApplicationContext(), "Email taken", Toast.LENGTH_LONG).show();
+
+
         }
         //check if password matches confirm password
 
         if (!stringPassword.equals(stringConfirmPassword)){
             validData = false;
-            b=(Button)findViewById(R.id.register);
-            b.setOnClickListener(new View.OnClickListener() {
-                                     @Override
-                                     public void onClick(View v) {
-                                         Toast.makeText(getApplicationContext(),"password do not match", Toast.LENGTH_LONG).show();
-                                     }
-                                 }
-            );
+            Toast.makeText(getApplicationContext(),"password do not match", Toast.LENGTH_LONG).show();
         }
 
         if (validData) {
@@ -166,16 +149,13 @@ public class Register extends AppCompatActivity {
             }
 
             Account newAccount;
-            if (stringUserType.equals("employee")){
-                newAccount = new Employee(hex, stringUsername, stringFirst, stringLast, stringEmail);
-            } else {
-                newAccount = new Patient(hex, stringUsername, stringFirst, stringLast, stringEmail);
-            }
+            newAccount = new Account(hex, stringUsername, stringFirst, stringLast, stringEmail,stringUserType);
+
 
             mydb.add (newAccount,database);
 
             Intent intent;
-            if (newAccount.getClass().equals(Employee.class)) {
+            if (newAccount.getAccountType().equals("Employee")) {
                 intent = new Intent(getApplicationContext(), WelcomeScreen.class);
                 intent.putExtra("accountType",stringUserType);
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
