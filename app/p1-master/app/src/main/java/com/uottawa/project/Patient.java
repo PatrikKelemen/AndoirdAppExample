@@ -10,7 +10,7 @@ public class Patient extends Account {
      * @param lastName a string with the last name of the user
      */
     public Patient(String password, String username, String firstName, String lastName, String email) {
-        super(password, username, firstName, lastName, email);
+        super(password, username, firstName, lastName, email,"Patient");
     }
 
 

@@ -15,7 +15,7 @@ public class Employee extends Account {
      * @param lastName a string with the last name of the user
      */
     public Employee(String password, String username, String firstName, String lastName, String email) {
-        super(password, username, firstName, lastName, email);
+        super(password, username, firstName, lastName, email,"Employee");
     }
 
 

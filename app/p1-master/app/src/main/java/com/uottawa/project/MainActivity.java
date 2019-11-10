@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         users = new ArrayList<>();
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
+
     }
 
     @Override
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-        mydb.addAdmin(database,users);
+        mydb.addAdmin(database,users); // check to makes sure admin exists
 
         //Check that the password and username are valid here
         String accountType ="";
@@ -77,20 +78,11 @@ public class MainActivity extends AppCompatActivity {
         String stringPassword = ((TextView)findViewById(R.id.password)).getText().toString();
         boolean validData = true;
 
-        if (mydb.exists(stringUsername, "Username",users)){
-            //(add toast here)
-            b=(Button)findViewById(R.id.login);
-            b.setOnClickListener(new View.OnClickListener() {
-                                     @Override
-                                     public void onClick(View v) {
-                                         Toast.makeText(getApplicationContext(), "You are successfully logged in!", Toast.LENGTH_LONG).show();
-                                     }
-                                 }
-            );
-        }
-        else{
+        if (!mydb.exists(stringUsername, "Username",users)){
             validData = false;
+            Toast.makeText(getApplicationContext(), "Username is wrong", Toast.LENGTH_LONG).show();
         }
+
 
 
         String hex = "";
@@ -117,14 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (!hex.equals( dbpassword)){
-                //((TextView)findViewById(R.id.password)).setText("username or password is wrong"); (replace with toast)
+                Toast.makeText(getApplicationContext(), "Username or password is wrong", Toast.LENGTH_LONG).show();
                 validData = false;
 
             } else {
                 Intent intent;
                 //Admin user
-                System.out.println((dbUser.getClass()));
-                if (dbUser.getClass().equals(Admin.class)) {
+
+                if (dbUser.getAccountType().equals("Admin")) {
+                    Admin userAdmin = new Admin(dbUser);
                     intent = new Intent(getApplicationContext(), AdminScreen.class);
 
                 //Employee user

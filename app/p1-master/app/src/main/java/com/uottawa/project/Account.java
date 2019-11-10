@@ -30,6 +30,8 @@ public class Account {
      */
     private String email ;
 
+    private String accountType;
+
 
     public Account() {
 
@@ -45,12 +47,14 @@ public class Account {
 
 
 
-    public Account(String password, String username, String firstName, String lastName, String email) {
+    public Account(String password, String username, String firstName, String lastName, String email,String accountType) {
         this.password = password;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.accountType = accountType;
+
     }
 
     /*
@@ -114,5 +118,12 @@ public class Account {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 }

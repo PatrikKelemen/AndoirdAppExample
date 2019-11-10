@@ -15,10 +15,12 @@ public class Admin extends Account {
      * @param lastName a string with the last name of the user
      */
     public Admin(String password, String username, String firstName, String lastName, String email) {
-        super(password, username, firstName, lastName, email);
+        super(password, username, firstName, lastName, email,"Admin");
     }
 
-
+    public Admin(Account user){
+       super (user.getPassword(), user.getUsername(),user.getFirstName(), user.getLastName(),user.getEmail(),"Admin");
+    }
     //These methods will be implemented when Admin support is added.
 
 
