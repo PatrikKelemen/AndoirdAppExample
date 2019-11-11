@@ -36,8 +36,9 @@ You are logged in as [role].
 
 The purpose of this deliverable was to:
 
-- update our UML diagram to reflect changes to the classes
-- submit a working [APK](https://github.com/professor-forward/project-lab01-variable/tree/master/app/p1-master/app/build/outputs/apk/debug/)
+- update our [UML diagram](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable02/UML/uml_delv2.png) to reflect changes to the classes
+![alt text](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable02/UML/uml_delv2.png "Updated UML for deliverable02")
+- submit a working [APK](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable02/APK/)
 - create 5 Unit tests for our app (not testing instrumentation or Espresso UI testing)
 - admin can create services
 - admin can remove services

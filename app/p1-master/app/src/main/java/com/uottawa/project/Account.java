@@ -30,6 +30,9 @@ public class Account {
      */
     private String email ;
 
+    /*
+     * Stores the account type when in database
+     */
     private String accountType;
 
 
