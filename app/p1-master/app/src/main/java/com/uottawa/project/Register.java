@@ -156,7 +156,7 @@ public class Register extends AppCompatActivity {
 
             Intent intent;
             if (newAccount.getAccountType().equals("Employee")) {
-                intent = new Intent(getApplicationContext(), AdminScreen.class);
+                intent = new Intent(getApplicationContext(), WelcomeScreen.class);
                 intent.putExtra("accountType",stringUserType);
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
             } else {

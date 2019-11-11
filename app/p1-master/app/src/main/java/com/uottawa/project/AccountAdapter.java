@@ -1,6 +1,7 @@
 package com.uottawa.project;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -24,7 +25,10 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
 
     }
 
-    public AccountAdapter(ArrayList<Account> accounts) {
+    private OnClick click;
+
+    public AccountAdapter(ArrayList<Account> accounts, OnClick click) {
+        this.click = click;
         this.accounts = accounts;
     }
 
@@ -37,8 +41,14 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
     }
 
     @Override
-    public void onBindViewHolder(AccountViewHolder holder, int position) {
+    public void onBindViewHolder(AccountViewHolder holder, final int position) {
         holder.textView.setText(this.accounts.get(position).getUsername());
+        holder.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click.clicked(accounts.get(position));
+            }
+        });
     }
 
     @Override
