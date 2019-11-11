@@ -25,7 +25,7 @@ public class AdminScreen extends AppCompatActivity {
     }
 
     public void onManageServices (View view) {
-        Intent intent = new Intent(getApplicationContext(), Register.class);
+        Intent intent = new Intent(getApplicationContext(), ManageServices.class);
         startActivityForResult(intent,0);
     }
 

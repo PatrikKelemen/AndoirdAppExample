@@ -30,7 +30,7 @@ public class Service {
     public Service(float rate, String name, String role, String id) {
         this.rate = rate;
         this.name = name;
-        this.role = rolee;
+        this.role = role;
         this.id = id;
     }
 
@@ -53,14 +53,14 @@ public class Service {
         this.name = name;
     }
 
-    public float getRole() { return role; }
+    public String getRole() { return role; }
 
     public void setRole(String role) {
         this.role = role;
     }
 
     public String getId() {
-        return name;
+        return id;
     }
 
     public void setId(String id) {

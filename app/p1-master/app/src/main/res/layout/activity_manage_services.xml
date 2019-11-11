@@ -16,24 +16,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name of Service" />
+            android:hint="Name of Service"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/ServiceRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Hourly Rate" />
+            android:hint="Hourly Rate"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/ServiceJob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Person Responsable " />
+            android:hint="Person Responsable "
+            android:inputType="textPersonName" />
 
         <LinearLayout
             android:layout_width="match_parent"
