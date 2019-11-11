@@ -11,9 +11,6 @@
 | Mathieu Bellefeuille | 6501369 |
 
 
-### Add CircleCi here?
-
-
 ## Deliverable 1
 
 The purpose of this deliverable was to: 
