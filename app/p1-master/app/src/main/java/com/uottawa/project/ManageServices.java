@@ -99,18 +99,30 @@ public class ManageServices extends AppCompatActivity {
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDelete);
 
         dialogBuilder.setTitle(serviceName);
+
+        editTextName.setText(serviceName);
+        editTextRate.setText(Float.toString(serviceRate));
+        editTextRole.setText(serviceRole);
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+                try
+                {
                 String serviceName = editTextName.getText().toString().trim();
                 float serviceRate = Float.parseFloat(editTextRate.getText().toString());
                 String serviceRole = editTextRole.getText().toString().trim();
                 if (!TextUtils.isEmpty(serviceName)&& !TextUtils.isEmpty(serviceRole)) {
                     updateService(serviceId, serviceName, serviceRate, serviceRole);
                     b.dismiss();
+                }
+                }
+                catch (NumberFormatException e)
+                {
                 }
             }
         });
@@ -141,13 +153,45 @@ public class ManageServices extends AppCompatActivity {
 
 
     public void onExit(View view){
-
+        finish();
     }
     public void onAdd(View view){
 
-
+        //validating all fields
         boolean valid = true;
+        if (TextUtils.isEmpty(editTextName.getText().toString()) ){
+            valid = false;
+            Toast.makeText(this, "Please enter a service Name", Toast.LENGTH_LONG).show();
+        }
 
+        else if (TextUtils.isEmpty(editTextRole.getText().toString())){
+            valid = false;
+            Toast.makeText(this, "Please enter a service Role", Toast.LENGTH_LONG).show();
+        }
+        else if (TextUtils.isEmpty(editTextRate.getText().toString())){
+            valid = false;
+            Toast.makeText(this, "Please enter a service Rate", Toast.LENGTH_LONG).show();
+        }
+
+        try
+        {
+            Float.parseFloat(editTextRate.getText().toString());
+
+        }
+        catch (NumberFormatException e)
+        {
+            valid = false;
+            Toast.makeText(this, "Rate entered in incorrect format", Toast.LENGTH_LONG).show();
+        }
+
+
+        for (int i = 0; i< services.size(); i++){
+            if (services.get(i).getName().equals(editTextName.getText().toString().trim())){
+                valid = false;
+                Toast.makeText(this, "Service already exists", Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
 
 
         if (valid){
