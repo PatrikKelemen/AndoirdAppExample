@@ -28,6 +28,7 @@
                 android:id="@+id/servicesBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onManageServices"
                 android:text="Manage Services" />
 
             <Button
