@@ -34,6 +34,7 @@
                 android:id="@+id/accountsBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onManageAccounts"
                 android:text="Manage Accounts" />
 
             <Button

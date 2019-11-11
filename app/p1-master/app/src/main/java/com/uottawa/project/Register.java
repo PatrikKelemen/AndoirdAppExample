@@ -125,7 +125,7 @@ public class Register extends AppCompatActivity {
 
         if (!stringPassword.equals(stringConfirmPassword)){
             validData = false;
-            Toast.makeText(getApplicationContext(),"password do not match", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Passwords do not match", Toast.LENGTH_LONG).show();
         }
 
         if (validData) {
@@ -156,7 +156,7 @@ public class Register extends AppCompatActivity {
 
             Intent intent;
             if (newAccount.getAccountType().equals("Employee")) {
-                intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                intent = new Intent(getApplicationContext(), AdminScreen.class);
                 intent.putExtra("accountType",stringUserType);
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
             } else {

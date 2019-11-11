@@ -29,6 +29,11 @@ public class AdminScreen extends AppCompatActivity {
         startActivityForResult(intent,0);
     }
 
+    public void onManageAccounts(View view) {
+        Intent intent = new Intent(getApplicationContext(), ManageAccounts.class);
+        startActivityForResult(intent, 0);
+    }
+
     public void onLogout(View view) {
         Intent returnIntent = new Intent();
         //We might use this to send stuff to the next page??
