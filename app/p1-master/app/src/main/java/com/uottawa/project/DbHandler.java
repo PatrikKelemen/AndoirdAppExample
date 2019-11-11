@@ -54,6 +54,7 @@ public class DbHandler {
 
     public void add(Account account, DatabaseReference database ) {
         String id = database.push().getKey();
+        account.setID(id);
         database.child(id).setValue(account);
     }
 

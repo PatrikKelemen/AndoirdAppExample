@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder> {
 
-    private ArrayList<Account> accounts;
+    private List<Account> accounts;
 
     public static class AccountViewHolder extends RecyclerView.ViewHolder {
 
@@ -27,7 +28,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
 
     private OnClick click;
 
-    public AccountAdapter(ArrayList<Account> accounts, OnClick click) {
+    public AccountAdapter(List<Account> accounts, OnClick click) {
         this.click = click;
         this.accounts = accounts;
     }

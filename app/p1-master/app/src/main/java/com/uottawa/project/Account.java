@@ -32,6 +32,8 @@ public class Account {
 
     private String accountType;
 
+    private String id;
+
 
     public Account() {
 
@@ -125,5 +127,13 @@ public class Account {
 
     public void setAccountType(String accountType) {
         this.accountType = accountType;
+    }
+
+    public String getID() {
+        return id;
+    }
+
+    public void setID(String id) {
+        this.id = id;
     }
 }

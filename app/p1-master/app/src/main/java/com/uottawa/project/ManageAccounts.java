@@ -7,15 +7,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManageAccounts extends AppCompatActivity implements DeleteAccountDialog.AccountDialogListener{
 
     private RecyclerView view;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layout;
-
+    DatabaseReference database;
+    List<Account> users;
+    OnClick onClick;
     //for testing
     private ArrayList<Account> testAccounts;
 
@@ -30,26 +40,52 @@ public class ManageAccounts extends AppCompatActivity implements DeleteAccountDi
         view.setLayoutManager(layout);
 
         //create list of accounts from database here
+        users = new ArrayList<>();
+        database = FirebaseDatabase.getInstance().getReference("users");
 
-        //for testing
-        testAccounts = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Account newP = new Patient("p"+i, "p"+i, "FirstP"+i,"LastP"+i, "p"+i+"@email.com");
-            Account newE = new Employee("e"+i, "e"+i, "FirstE"+i,"LastE"+i, "e"+i+"@email.com");
-            testAccounts.add(newP);
-            testAccounts.add(newE);
-        }
-        //end of for testing
-        OnClick onClick = new OnClick() {
+         onClick = new OnClick() {
             @Override
             public void clicked(Account account) {
+
                 DeleteAccountDialog dialog = new DeleteAccountDialog(account);
                 dialog.show(getSupportFragmentManager(), "delete account");
             }
         };
 
-        adapter = new AccountAdapter(testAccounts, onClick);
-        view.setAdapter(adapter);
+
+
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        database.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot){
+                users.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Account user = postSnapshot.getValue(Account.class);
+                    if (!user.getAccountType().equals( "Admin"))
+                        users.add(user);
+                }
+
+
+                adapter = new AccountAdapter(users, onClick);
+                view.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
+
+
     }
 
     public void onDone(View view) {
@@ -64,8 +100,14 @@ public class ManageAccounts extends AppCompatActivity implements DeleteAccountDi
         //delete account from database
 
 
-        int index = testAccounts.indexOf(account);
-        testAccounts.remove(index);
-        adapter.notifyItemRemoved(index);
+        String id = account.getID();
+        DatabaseReference dR = database.child(id);
+        dR.removeValue();
+
+        Toast.makeText(getApplicationContext(), "Account  deleted", Toast.LENGTH_LONG).show();
+
+        //int index = testAccounts.indexOf(account);
+        //testAccounts.remove(index);
+       // adapter.notifyItemRemoved(index);
     }
 }

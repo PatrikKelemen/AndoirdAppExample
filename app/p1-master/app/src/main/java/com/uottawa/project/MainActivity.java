@@ -22,9 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Initialize context
-    protected Button b;
-    String s= "Username/password is incorrect";
+
     DatabaseReference database;
     List<Account> users;
     private DbHandler mydb = new DbHandler();
