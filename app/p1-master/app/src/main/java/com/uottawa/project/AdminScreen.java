@@ -2,29 +2,36 @@ package com.uottawa.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.content.Intent;
 import android.widget.TextView;
 
-
-public class WelcomeScreen extends AppCompatActivity {
+public class AdminScreen extends AppCompatActivity {
 
     private DbHandler mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_screen);
+        setContentView(R.layout.activity_admin_screen);
 
         Intent welcome = this.getIntent();
 
         String stringUsername = welcome.getStringExtra("username");
-        String accountType = welcome.getStringExtra("accountType");
         mydb = new DbHandler();
         String dbName = stringUsername;
-        ((TextView)findViewById(R.id.welcomeMsg)).setText("Welcome "+dbName+". You are logged in as "+accountType+".");
+        ((TextView)findViewById(R.id.welcomeMsg)).setText("Welcome "+dbName+". You are logged in as Admin.");
+    }
 
+    public void onManageServices (View view) {
+        Intent intent = new Intent(getApplicationContext(), ManageServices.class);
+        startActivityForResult(intent,0);
+    }
+
+    public void onManageAccounts(View view) {
+        Intent intent = new Intent(getApplicationContext(), ManageAccounts.class);
+        startActivityForResult(intent, 0);
     }
 
     public void onLogout(View view) {
@@ -35,4 +42,7 @@ public class WelcomeScreen extends AppCompatActivity {
         setResult(RESULT_OK, returnIntent);
         finish();
     }
+
+
+
 }
