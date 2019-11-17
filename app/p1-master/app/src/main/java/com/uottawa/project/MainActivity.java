@@ -120,7 +120,12 @@ public class MainActivity extends AppCompatActivity {
 
                 //Employee user
                 } else if (dbUser.getClass().equals(Employee.class)) {
-                    intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                    //check if employee is part of a clinic
+                    if (true) {
+                        intent = new Intent(getApplicationContext(), EmployeeScreenWithoutClinic.class);
+                    } else {
+                        intent = new Intent(getApplicationContext(), EmployeeScreen.class);
+                    }
                     intent.putExtra("accountType","Employee");
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
                 } else {
