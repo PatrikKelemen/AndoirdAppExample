@@ -30,6 +30,8 @@ public class EmployeeScreen extends AppCompatActivity {
 
     public void onManageHours(View view) {
         //add changing hours here
+        Intent intent = new Intent(getApplicationContext(), EmployeeHours.class);
+        startActivityForResult(intent, 0);
     }
 
     public void onLogout(View view) {
