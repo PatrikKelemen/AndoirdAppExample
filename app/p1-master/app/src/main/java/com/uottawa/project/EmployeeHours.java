@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -42,7 +43,6 @@ public class EmployeeHours extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 currentStart = progress;
-
             }
 
             @Override
@@ -57,6 +57,9 @@ public class EmployeeHours extends AppCompatActivity {
                 } else if (currentEnd == currentStart) {
                     Toast.makeText(getApplicationContext(), "Endtime cannot be the same as the start time.", Toast.LENGTH_SHORT).show();
                 }
+
+                TextView selected = (TextView) findViewById(R.id.selectedTime);
+                selected.setText("Time Selected: "+currentStart+":00 - "+currentEnd+":00");
             }
         });
 
@@ -65,7 +68,6 @@ public class EmployeeHours extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 currentEnd = progress;
-
             }
 
             @Override
@@ -81,6 +83,9 @@ public class EmployeeHours extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Endtime cannot be the same as the start time.", Toast.LENGTH_SHORT).show();
                 }
                 System.out.println("end");
+
+                TextView selected = (TextView) findViewById(R.id.selectedTime);
+                selected.setText("Time Selected: "+currentStart+":00 - "+currentEnd+":00");
             }
         });
 
@@ -91,28 +96,60 @@ public class EmployeeHours extends AppCompatActivity {
                 if (isChecked) {
                     findViewById(R.id.endTimeSelection).setEnabled(true);
                     findViewById(R.id.startTimeSelection).setEnabled(true);
+
+                    TextView selected = (TextView) findViewById(R.id.selectedTime);
+                    selected.setText("Time Selected: "+currentStart+":00 - "+currentEnd+":00");
                 } else {
                     findViewById(R.id.endTimeSelection).setEnabled(false);
                     findViewById(R.id.startTimeSelection).setEnabled(false);
+
+                    TextView selected = (TextView) findViewById(R.id.selectedTime);
+                    selected.setText("Time Selected: None");
                 }
             }
         });
     }
 
+    //reads from the database
     private void updateScreen() {
         //get the updated hours from the database
+
+        /*
+            CalendarView cal = (CalendarView) findViewById(R.id.calendar);
+
+         	This may be useful, IDK?:
+
+         	cal.getDate();
+
+            Gets the selected date in milliseconds since January 1, 1970 00:00:00 in TimeZone#getDefault() time zone.
+            Returns a long.
+         */
+
+        //the following 3 variables just have place holder values for now
         Boolean isWorking = true; //if the person is working that day
+        currentStart = 7; //the time the shift starts at
+        currentEnd = 19; //the time the shift ends at
+
 
 
         Switch workingSwitch = (Switch) findViewById(R.id.isWorking);
+        SeekBar start = (SeekBar) findViewById(R.id.startTimeSelection);
+        SeekBar end = (SeekBar) findViewById(R.id.endTimeSelection);
+
         if (!isWorking){
             workingSwitch.setChecked(false);
-            SeekBar end = (SeekBar) findViewById(R.id.endTimeSelection);
             end.setEnabled(false);
-            SeekBar start = (SeekBar) findViewById(R.id.startTimeSelection);
             start.setEnabled(false);
+
+            TextView selected = (TextView) findViewById(R.id.selectedTime);
+            selected.setText("Time Selected: None");
         } else {
             workingSwitch.setChecked(true);
+            start.setProgress(currentStart);
+            end.setProgress(currentEnd);
+
+            TextView selected = (TextView) findViewById(R.id.selectedTime);
+            selected.setText("Time Selected: "+currentStart+":00 - "+currentEnd+":00");
         }
     }
 
@@ -122,6 +159,7 @@ public class EmployeeHours extends AppCompatActivity {
         finish();
     }
 
+    //writes to the database
     public void onUpdate(View view) {
         if (currentEnd < currentStart) {
             Toast.makeText(getApplicationContext(), "Unable to update hours.\nEndtime of shift must be after start.", Toast.LENGTH_SHORT).show();
