@@ -1,9 +1,10 @@
 package com.uottawa.project;
+
 import android.widget.TextView;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.rule.ActivityTestRule;
-import org.junit.Assert;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
