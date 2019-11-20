@@ -156,9 +156,9 @@ public class Register extends AppCompatActivity {
 
             Intent intent;
             if (newAccount.getAccountType().equals("Employee")) {
-                intent = new Intent(getApplicationContext(), EmployeeScreen.class);
+                intent = new Intent(getApplicationContext(), EmployeeScreenWithoutClinic.class);
                 intent.putExtra("accountType",stringUserType);
-                
+
                 Hours hours = new Hours(stringUsername); //add this to database
 
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)

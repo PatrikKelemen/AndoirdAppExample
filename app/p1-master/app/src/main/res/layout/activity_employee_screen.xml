@@ -39,6 +39,13 @@
                 android:text="Manage Your Working Hours" />
 
             <Button
+                android:id="@+id/clinicHoursBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onManageClinicHours"
+                android:text="Manage Clinic's Working Hours" />
+
+            <Button
                 android:id="@+id/logOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

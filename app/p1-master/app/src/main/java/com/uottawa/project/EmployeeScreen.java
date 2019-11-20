@@ -36,6 +36,13 @@ public class EmployeeScreen extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
+    public void onManageClinicHours(View view) {
+        //add changing hours here
+        Intent intent = new Intent(getApplicationContext(), ClinicHours.class);
+        //intent.putExtra("username", name);
+        startActivityForResult(intent, 0);
+    }
+
     public void onLogout(View view) {
         Intent returnIntent = new Intent();
 
