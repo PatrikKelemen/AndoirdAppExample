@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class EmployeeScreen extends AppCompatActivity {
 
     private DbHandler mydb;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +19,9 @@ public class EmployeeScreen extends AppCompatActivity {
 
         Intent welcome = this.getIntent();
 
-        String stringUsername = welcome.getStringExtra("username");
+        username = welcome.getStringExtra("username");
         mydb = new DbHandler();
-        String dbName = stringUsername;
+        String dbName = username;
         ((TextView)findViewById(R.id.welcomeMsg)).setText("Welcome "+dbName+". You are logged in as an Employee.");
     }
 
@@ -31,6 +32,7 @@ public class EmployeeScreen extends AppCompatActivity {
     public void onManageHours(View view) {
         //add changing hours here
         Intent intent = new Intent(getApplicationContext(), EmployeeHours.class);
+        intent.putExtra("username", username);
         startActivityForResult(intent, 0);
     }
 

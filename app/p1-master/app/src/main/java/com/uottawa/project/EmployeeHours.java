@@ -23,12 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class EmployeeHours extends AppCompatActivity {
 
     private int currentStart;
     private int currentEnd;
+    private long selectedDate;
 
     DatabaseReference database;
     Hours currentEmployeeHours;
@@ -39,18 +41,28 @@ public class EmployeeHours extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_hours);
 
+        Intent welcome = this.getIntent();
+
+        String username = welcome.getStringExtra("username");
+
 
         database = FirebaseDatabase.getInstance().getReference("Hours");
 
+        //get the currentEmployeeHours here
+        //currentEmployeeHours = new Hours("Jeff"); //for testing
 
         //updateScreen changes the display to mirror the working hours in the database
         //you will need to change it please
+        CalendarView cal = (CalendarView) findViewById(R.id.calendar);
+        selectedDate = cal.getDate();
         updateScreen();
 
-        CalendarView cal = (CalendarView) findViewById(R.id.calendar);
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Calendar c = Calendar.getInstance();
+                c.set(year, month, dayOfMonth);
+                selectedDate = c.getTimeInMillis();
                 updateScreen();
             }
         });
@@ -170,12 +182,16 @@ public class EmployeeHours extends AppCompatActivity {
             Returns a long.
          */
 
-        //the following 3 variables just have place holder values for now
-        Boolean isWorking = true; //if the person is working that day
-        currentStart = 7; //the time the shift starts at
-        currentEnd = 19; //the time the shift ends at
+        int[] hours = currentEmployeeHours.getHours(selectedDate);
 
-
+        Boolean isWorking; //if the person is working that day
+        if (hours == null) {
+            isWorking = false;
+        } else {
+            isWorking = true;
+            currentStart = hours[0]; //the time the shift starts at
+            currentEnd = hours[1]; //the time the shift ends at
+        }
 
         Switch workingSwitch = (Switch) findViewById(R.id.isWorking);
         SeekBar start = (SeekBar) findViewById(R.id.startTimeSelection);
@@ -183,6 +199,8 @@ public class EmployeeHours extends AppCompatActivity {
 
         if (!isWorking){
             workingSwitch.setChecked(false);
+            start.setProgress(0);
+            end.setProgress(0);
             end.setEnabled(false);
             start.setEnabled(false);
 
@@ -217,24 +235,24 @@ public class EmployeeHours extends AppCompatActivity {
         //update the hours class here to prepare to send to database
         Switch workingSwitch = (Switch) findViewById(R.id.isWorking);
         CheckBox repeat = (CheckBox) findViewById(R.id.weeklyRepeat);
+        int start;
+        int end;
         if (workingSwitch.isChecked()) {
             //send currentEnd as the end of the shift and currentStart as the start of the shift
-            if (repeat.isChecked()) {
-                //set the given hours as happening every week
-            } else {
-                //set the given hours as the hours for this day only
-            }
+            start = currentStart;
+            end = currentEnd;
         } else {
-            if (repeat.isChecked()) {
-                //set them as not working on this day every week
-            } else {
-                //set them as not working on this day
-            }
+            //-1 as start and end means not working
+            start = -1;
+            end = -1;
         }
 
+        currentEmployeeHours.setHours(selectedDate, start, end, repeat.isChecked());
+        repeat.setChecked(false);
 
 
-        DatabaseReference dR = database.child(currentEmployeeHours.id);
+
+        DatabaseReference dR = database.child(currentEmployeeHours.getId());
         dR.setValue(currentEmployeeHours);
         Toast.makeText(getApplicationContext(), "Hours Updated", Toast.LENGTH_SHORT).show();
     }
