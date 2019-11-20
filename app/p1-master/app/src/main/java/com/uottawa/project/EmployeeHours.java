@@ -16,15 +16,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmployeeHours extends AppCompatActivity {
 
     private int currentStart;
     private int currentEnd;
 
+    DatabaseReference database;
+    Hours currentEmployeeHours;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_hours);
+
+
+        database = FirebaseDatabase.getInstance().getReference("Hours");
+
 
         //updateScreen changes the display to mirror the working hours in the database
         //you will need to change it please
@@ -108,7 +125,35 @@ public class EmployeeHours extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Hours hours = postSnapshot.getValue(Hours.class);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
+    }
+
 
     //reads from the database
     private void updateScreen() {
@@ -169,7 +214,7 @@ public class EmployeeHours extends AppCompatActivity {
             return;
         }
 
-        //update database hours here
+        //update the hours class here to prepare to send to database
         Switch workingSwitch = (Switch) findViewById(R.id.isWorking);
         CheckBox repeat = (CheckBox) findViewById(R.id.weeklyRepeat);
         if (workingSwitch.isChecked()) {
@@ -187,6 +232,10 @@ public class EmployeeHours extends AppCompatActivity {
             }
         }
 
+
+
+        DatabaseReference dR = database.child(currentEmployeeHours.id);
+        dR.setValue(currentEmployeeHours);
         Toast.makeText(getApplicationContext(), "Hours Updated", Toast.LENGTH_SHORT).show();
     }
 }
