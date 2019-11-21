@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +23,7 @@ public class EmployeeScreenWithoutClinic extends AppCompatActivity {
     private DbHandler mydb;
     DatabaseReference database;
     List<Clinic> ClinicList;
+    String stringUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class EmployeeScreenWithoutClinic extends AppCompatActivity {
 
         Intent welcome = this.getIntent();
 
-        String stringUsername = welcome.getStringExtra("username");
+         stringUsername = welcome.getStringExtra("username");
         mydb = new DbHandler();
         String dbName = stringUsername;
         ((TextView)findViewById(R.id.welcomeMsg)).setText("Welcome "+dbName+". You are logged in as an Employee.");
@@ -62,12 +65,68 @@ public class EmployeeScreenWithoutClinic extends AppCompatActivity {
 
 
     public void onCreateClinic(View view) {
-        String stringUsername = ((TextView)findViewById(R.id.ClinicName)).getText().toString();
+        String stringClinic = ((TextView)findViewById(R.id.ClinicName)).getText().toString();
+
+        boolean exists = false;
+        for (int i = 0; i< ClinicList.size();i++){
+           if (stringClinic.equals(ClinicList.get(i).getName())){
+               exists = true;
+           }
+
+        }
+        if (!exists){
+            Clinic newClinic = new Clinic(stringClinic);
+            newClinic.addEmployee(new Employee(stringUsername));
+            String id = database.push().getKey();
+            newClinic.setID(id);
+            database.child(id).setValue(newClinic);
+
+            Intent intent = new Intent(getApplicationContext(), EmployeeScreen.class);
+            intent.putExtra("clinic",stringClinic);
+            intent.putExtra("username",stringUsername);
+            startActivityForResult(intent, 0);
+
+            Intent returnIntent = new Intent();
+
+            setResult(RESULT_OK, returnIntent);
+            finish();
+
+
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Clinic already exists", Toast.LENGTH_LONG).show();
+        }
 
     }
 
     public void onJoinClinic(View view) {
-        //add joining clinics here
+        String stringClinic = ((TextView)findViewById(R.id.ClinicName)).getText().toString();
+
+
+
+        for (int i = 0; i< ClinicList.size();i++){
+            if (stringClinic.equals(ClinicList.get(i).getName())){
+                Clinic newClinic = ClinicList.get(i);
+                newClinic.addEmployee(new Employee(stringUsername));
+                String id = newClinic.getID();
+                DatabaseReference dR = database.child(id);
+                dR.setValue(newClinic);
+
+                Intent intent = new Intent(getApplicationContext(), EmployeeScreen.class);
+                intent.putExtra("clinic",stringClinic);
+                intent.putExtra("username",stringUsername);
+                startActivityForResult(intent, 0);
+
+                Intent returnIntent = new Intent();
+
+                setResult(RESULT_OK, returnIntent);
+                finish();
+
+            }
+
+        }
+        Toast.makeText(getApplicationContext(), "Clinic does not exist", Toast.LENGTH_LONG).show();
+
     }
 
     public void onLogout(View view) {

@@ -17,6 +17,9 @@ public class Employee extends Account {
     public Employee(String password, String username, String firstName, String lastName, String email) {
         super(password, username, firstName, lastName, email,"Employee");
     }
+    public Employee( String username) {
+        super("", username, "", "", "","Employee");
+    }
 
 
     //This method will be implemented when the Employee functionallity is added.
