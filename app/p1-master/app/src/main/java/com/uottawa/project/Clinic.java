@@ -17,7 +17,7 @@ public class Clinic {
     /*
      * The arraylist of employees who work at the clinic.
      */
-    private ArrayList<Employee> employees;
+    private ArrayList<Employee> employees= new ArrayList<>();
 
     /*
      * The array of hours the Clinic opens at.
