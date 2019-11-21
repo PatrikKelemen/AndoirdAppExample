@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference database;
     List<Account> users;
     private DbHandler mydb = new DbHandler();
+    DatabaseReference Clinics;
+    List<Clinic> ClinicList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         users = new ArrayList<>();
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
-
+        ClinicList = new ArrayList<>();
+        Clinics = FirebaseDatabase.getInstance().getReference("Clinics");
     }
 
     @Override
@@ -48,6 +51,26 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Account user = postSnapshot.getValue(Account.class);
                     users.add(user);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
+
+
+        Clinics.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot){
+                ClinicList.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Clinic clinic = postSnapshot.getValue(Clinic.class);
+                    ClinicList.add(clinic);
                 }
 
             }
@@ -119,10 +142,26 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(getApplicationContext(), AdminScreen.class);
 
                 //Employee user
-                } else if (dbUser.getClass().equals(Employee.class)) {
+                } else if (dbUser.getAccountType().equals("Employee")) {
                     //check if employee is part of a clinic
-                    if (true) {
+                    boolean hasClinic = false;
+                    Clinic employeesClinic = ClinicList.get(1);
+
+                    for (int i = 0; i< ClinicList.size();i++){
+                        ArrayList<Employee> next = ClinicList.get(i).getEmployees();
+                        for(int j = 0; j< next.size(); j++){
+                            if (next.get(j).getUsername().equals(stringUsername)){
+                                hasClinic = true;
+                                employeesClinic = ClinicList.get(i);
+                            }
+                        }
+
+                    }
+
+
+                    if (hasClinic) {
                         intent = new Intent(getApplicationContext(), EmployeeScreenWithoutClinic.class);
+                        intent.putExtra("clinic",employeesClinic.getName());
                     } else {
                         intent = new Intent(getApplicationContext(), EmployeeScreen.class);
                     }

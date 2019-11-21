@@ -34,7 +34,7 @@ public class EmployeeHours extends AppCompatActivity {
 
     DatabaseReference database;
     Hours currentEmployeeHours;
-
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,12 @@ public class EmployeeHours extends AppCompatActivity {
 
         Intent welcome = this.getIntent();
 
-        String username = welcome.getStringExtra("username");
+        username = welcome.getStringExtra("username");
 
 
         database = FirebaseDatabase.getInstance().getReference("Hours");
+
+
 
         //get the currentEmployeeHours here
         //currentEmployeeHours = new Hours("Jeff"); //for testing
@@ -154,7 +156,16 @@ public class EmployeeHours extends AppCompatActivity {
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Hours hours = postSnapshot.getValue(Hours.class);
+                    if (hours.getName().equals(username)){
+                        currentEmployeeHours = hours;
+                        break;
+                    }
+                }
 
+
+                if (currentEmployeeHours == null){
+                    currentEmployeeHours = new Hours();
+                    currentEmployeeHours.setId(database.push().getKey());
                 }
 
             }

@@ -31,6 +31,14 @@
                 android:layout_gravity="center"
                 android:text="You are not yet part of a clinic." />
 
+            <EditText
+                android:id="@+id/ClinicName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter new/current name of clinic"
+                android:inputType="textPersonName" />
+
             <Button
                 android:id="@+id/createClinicBtn"
                 android:layout_width="match_parent"

@@ -12,7 +12,7 @@ public class Clinic {
     /*
      * The arrayList of services the Clinic provides.
      */
-    private ArrayList<Service> services;
+    private ArrayList<Service> services= new ArrayList<Service>();
 
     /*
      * The arraylist of employees who work at the clinic.
@@ -30,13 +30,15 @@ public class Clinic {
     private int[] closeHours;
 
 
+    public Clinic() {
+    }
+
     /**
      * Creates a new Clinic.
      * @param name a string with the name of the Clinic
      */
     public Clinic(String name) {
         this.name = name;
-        this.services = new ArrayList<Service>();
     }
 
 
@@ -78,4 +80,12 @@ public class Clinic {
     public void addEmployee(Employee employee) {
         this.employees.add(employee);
     }
+
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+    public String getName() {
+        return name;
+    }
+
 }

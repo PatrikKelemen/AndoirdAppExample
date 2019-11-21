@@ -30,13 +30,18 @@ public class ClinicHours extends AppCompatActivity {
 
     DatabaseReference database;
     Hours currentClinicHours;
+    String clinicName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic_hours);
 
-        database = FirebaseDatabase.getInstance().getReference("Hours");
+        Intent welcome = this.getIntent();
+
+        clinicName = welcome.getStringExtra("clinicName");
+
+        database = FirebaseDatabase.getInstance().getReference("ClinicHours");
 
         //get the currentEmployeeHours here
         currentClinicHours = new Hours("Jeff"); //for testing
@@ -140,7 +145,15 @@ public class ClinicHours extends AppCompatActivity {
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Hours hours = postSnapshot.getValue(Hours.class);
+                    if (hours.getName().equals(clinicName)){
+                        currentClinicHours = hours;
+                        break;
+                    }
+                }
 
+                if (currentClinicHours == null){
+                    currentClinicHours = new Hours();
+                    currentClinicHours.setId(database.push().getKey());
                 }
 
             }
