@@ -53,7 +53,7 @@ Additional Notes:
 
 The purpose of this deliverable was to:
 
-- update our [UML diagram](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable02/UML/uml_delv3.png) to reflect changes to the classes
+- update our [UML diagram](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable02/UML/) to reflect changes to the classes
 - submit a working [APK](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable02/APK/)
 - create 2 new [Unit tests](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable02/app/p1-master/app/src/androidTest/java/com/uottawa/project) for our app (not testing instrumentation or Espresso UI testing)
 - employee can create clinics with: an address, phone number, name, insurance type and payment methods
