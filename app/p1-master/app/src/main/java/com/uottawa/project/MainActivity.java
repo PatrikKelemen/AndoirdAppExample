@@ -159,11 +159,12 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-                    if (hasClinic) {
+                    if (!hasClinic) {
                         intent = new Intent(getApplicationContext(), EmployeeScreenWithoutClinic.class);
-                        intent.putExtra("clinic",employeesClinic.getName());
+
                     } else {
                         intent = new Intent(getApplicationContext(), EmployeeScreen.class);
+                        intent.putExtra("clinic",employeesClinic.getName());
                     }
                     intent.putExtra("accountType","Employee");
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
