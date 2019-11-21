@@ -41,7 +41,7 @@ public class EmployeeScreen extends AppCompatActivity {
 
     public void onManageServices(View view) {
         //add changing services here
-        Intent intent = new Intent(getApplicationContext(), ClinicHours.class);
+        Intent intent = new Intent(getApplicationContext(), ClinicServices.class);
         intent.putExtra("clinicName", ClinicName);
         startActivityForResult(intent, 0);
     }
