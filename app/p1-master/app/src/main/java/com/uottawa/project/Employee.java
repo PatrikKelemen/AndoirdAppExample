@@ -21,6 +21,8 @@ public class Employee extends Account {
         super("", username, "", "", "","Employee");
     }
 
+    public Employee() {};
+
 
     //This method will be implemented when the Employee functionallity is added.
 

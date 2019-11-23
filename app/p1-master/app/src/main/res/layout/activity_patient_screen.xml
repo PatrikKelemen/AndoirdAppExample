@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminScreen">
+    tools:context=".PatientScreen">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/imageView5"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/app_background_faded" />
@@ -29,21 +29,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Welcome" />
+                android:text="Welcome." />
 
-            <Button
-                android:id="@+id/servicesBtn"
+            <TextView
+                android:id="@+id/currentTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onManageServices"
-                android:text="Manage Services" />
+                android:text="Current Appointments:" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/currentAppointments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <Button
-                android:id="@+id/accountsBtn"
+                android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onManageAccounts"
-                android:text="Manage Accounts" />
+                android:onClick="onSearchClincs"
+                android:text="Search Clinics" />
 
             <Button
                 android:id="@+id/logOut"
@@ -53,4 +57,5 @@
                 android:text="Log Out" />
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

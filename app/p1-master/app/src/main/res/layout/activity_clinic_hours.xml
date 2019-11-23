@@ -7,6 +7,13 @@
     tools:context=".ClinicHours">
 
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/app_background_faded" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

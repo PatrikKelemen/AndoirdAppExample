@@ -18,6 +18,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+//the code for this Activity (this class and  AccountAdapter) was based on the code given as an
+//example of how to use RecyclerView in the Android Documentation at:
+//https://developer.android.com/guide/topics/ui/layout/recyclerview
+//other activities that also use RecyclerView were based off this one
+
 public class ManageAccounts extends AppCompatActivity implements DeleteAccountDialog.AccountDialogListener{
 
     private RecyclerView view;
