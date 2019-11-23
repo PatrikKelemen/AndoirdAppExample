@@ -1,4 +1,5 @@
 package com.uottawa.project;
+package com.uottawa.project;
 
 import android.widget.TextView;
 
@@ -12,8 +13,7 @@ import org.*;
 
 import static org.junit.Assert.assertNotEquals;
 
-public class RegisterActivityTest {
-
+public class DetailTest {
 
     @Rule
     public ActivityTestRule<Register> mRegisterTestRule= new ActivityTestRule(Register.class);
@@ -33,11 +33,11 @@ public class RegisterActivityTest {
 
     @Test
     @UiThreadTest
-    public  void checkRegisterUserName() throws  Exception{
-        text = mRegister.findViewById(R.id.username);
-        text.setText("user1");
+    public  void checkFirstName() throws  Exception{
+        text = mRegister.findViewById(R.id.lastname);
+        text.setText("last");
         String name= text.getText().toString();
-        assertNotEquals( "user",name);
+        assertNotEquals( "last",name);
     }
 
     /*
@@ -46,14 +46,19 @@ public class RegisterActivityTest {
 
     @Test
     @UiThreadTest
-    public  void checkRegisterEmail() throws  Exception{
-        text = mRegister.findViewById(R.id.email);
-        text.setText("email@gmail.com");
+    public  void checkLastName() throws  Exception{
+        text = mRegister.findViewById(R.id.firstname);
+        text.setText("first");
         String name= text.getText().toString();
-        AssertJUnit.assertEquals( "email@gmail.com",name);
+        AssertJUnit.assertEquals( "first",name);
     }
-
-
-
+    @Test
+    @UiThreadTest
+    public  void checkConfirmPass() throws  Exception{
+        text = mRegister.findViewById(R.id.comfirmpassword);
+        text.setText("com");
+        String name= text.getText().toString();
+        AssertJUnit.assertEquals( "com",name);
+    }
 }
 

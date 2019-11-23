@@ -45,7 +45,7 @@ class Clinic
   public void addService(Service service) {}
   public void removeService(Service service) {}
   public void addEmployee(Employee employee){}
-}//$?[End_of_model]$?
+}
 
 namespace -;
 
@@ -64,12 +64,12 @@ class Admin
 class Employee
 {
   position 382 308 208 76;
-  position.association Clinic__Employee 11,93 214,0;
+  position.association Clinic__Employee 38,146 214,0;
 }
 
 class Clinic
 {
-  position 355 559 230 147;
+  position 274 516 244 162;
 }
 
 class Patient
@@ -80,5 +80,35 @@ class Patient
 class Service
 {
   position 73 584 109 93;
-  position.association Clinic__Service 110,4 0,90;
+  position.association Clinic__Service 112,4 0,90;
+}
+class Hours
+{
+  class SingleHours{
+    long day;
+    int start;
+    int end;
+    
+  }
+  String id;
+  SingleHours[] specialHours;
+  SingleHours[] weeklyHours;
+  String name;
+  1 -- 1 Clinic;
+  1 -- 1 Employee;
+  
+}//$?[End_of_model]$?
+
+namespace -;
+
+
+class Hours
+{
+  position 621 515 212 128;
+  position.association Employee__Hours 1,0 209,114;
+}
+
+class SingleHours
+{
+  position 899 605 109 111;
 }

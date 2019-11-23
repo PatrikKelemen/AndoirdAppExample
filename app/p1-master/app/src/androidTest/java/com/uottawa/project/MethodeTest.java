@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MethodeTest {
-    public Account testAccount = new Account("team", "User", "firstname", "lastName" );
+    public Account testAccount = new Account("team", "User", "firstname", "lastName", "email", "account" );
 
     /*
      *   Unit Local test for hasshing method on activity_main
