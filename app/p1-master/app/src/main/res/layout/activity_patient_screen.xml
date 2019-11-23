@@ -35,7 +35,9 @@
                 android:id="@+id/currentTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Current Appointments:" />
+                android:padding="10dp"
+                android:text="Current Appointments:"
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/currentAppointments"
@@ -46,7 +48,8 @@
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onSearchClincs"
+                android:onClick="onSearchClinics"
+                android:paddingTop="10dp"
                 android:text="Search Clinics" />
 
             <Button

@@ -56,12 +56,6 @@ public class ManageAccounts extends AppCompatActivity implements DeleteAccountDi
                 dialog.show(getSupportFragmentManager(), "delete account");
             }
         };
-
-
-
-
-
-
     }
 
     @Override
