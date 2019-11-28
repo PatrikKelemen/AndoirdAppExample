@@ -22,6 +22,11 @@ public class Appointment {
      */
     private Patient patient;
 
+    /*
+     * The id of the appointment in the database.
+     */
+    private String id;
+
     public Appointment(String date, String time, Clinic clinic, Patient patient) {
         this.date = date;
         this.time = time;
@@ -61,5 +66,13 @@ public class Appointment {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    public String getID() {
+        return id;
     }
 }

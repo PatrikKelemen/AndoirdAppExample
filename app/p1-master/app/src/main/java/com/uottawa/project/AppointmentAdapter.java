@@ -15,6 +15,7 @@ import java.util.List;
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder> {
 
     private List<Appointment> appointments;
+    private AppointmentViewListener click;
 
     public static class AppointmentViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,8 +34,14 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         }
     }
 
-    public AppointmentAdapter(List<Appointment> appointments) {
+    public interface AppointmentViewListener {
+        public void onCancel(Appointment a);
+        public void onCheckIn(Appointment a);
+    }
+
+    public AppointmentAdapter(List<Appointment> appointments, AppointmentViewListener click) {
         this.appointments = appointments;
+        this.click = click;
     }
 
     @Override
@@ -46,9 +53,23 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public void onBindViewHolder(AppointmentViewHolder holder, final int position) {
-        Appointment a = this.appointments.get(position);
+        final Appointment a = this.appointments.get(position);
         holder.clinic.setText(a.getClinic().getName());
         holder.time.setText(a.getDate()+" at "+a.getTime());
+
+        holder.checkIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click.onCheckIn(a);
+            }
+        });
+
+        holder.cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click.onCancel(a);
+            }
+        });
     }
 
     @Override

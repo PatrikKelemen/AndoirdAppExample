@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,27 @@ public class PatientScreen extends AppCompatActivity {
         appointments = new ArrayList<Appointment>();
         appointments.add(new Appointment("Nov. 11, 2019","9:30", new Clinic(), new Patient("","d","","","")));
 
-        adapter = new AppointmentAdapter(appointments);
+        appointments.add(new Appointment("Nov. 12, 2019","10:30", new Clinic(), new Patient("","d","","","")));
+
+        adapter = new AppointmentAdapter(appointments, new AppointmentAdapter.AppointmentViewListener() {
+            @Override
+            public void onCancel(Appointment a) {
+                System.out.println(a.getDate());
+                int index = appointments.indexOf(a);
+                appointments.remove(a);
+                //remove from database?
+                //should we notify the staff?
+
+                Toast.makeText(getApplicationContext(), "Appointment Cancelled", Toast.LENGTH_LONG).show();
+
+                adapter.notifyItemRemoved(index);
+            }
+
+            @Override
+            public void onCheckIn(Appointment a) {
+                System.out.println(a.getTime());
+            }
+        });
         currentAppointments.setAdapter(adapter);
     }
 
@@ -48,4 +69,10 @@ public class PatientScreen extends AppCompatActivity {
         setResult(RESULT_OK, returnIntent);
         finish();
     }
+    /*public void onCancel(View view) {
+        System.out.println("cancel");
+    }
+    public void onCheckIn(View view) {
+        System.out.println("check in");
+    }*/
 }
