@@ -28,6 +28,7 @@ public class Search extends AppCompatActivity {
     Button search;
     EditText SearchBox;
     static List<Clinic> ClinicList;
+    static List<Float> ratingsList;
     List<Clinic> ResultClinic;
     int[] openHours = {6,7,8,9};
     int[] closingHours = {3,4,5,6};
@@ -44,6 +45,7 @@ public class Search extends AppCompatActivity {
         search = (Button) findViewById(R.id.button);
 
         ResultClinic = new ArrayList<>();
+        ratingsList = new ArrayList<>();
         databaseProducts = FirebaseDatabase.getInstance().getReference("Clinics");
         //test clinicNameSearch
         ClinicList = new ArrayList<>();

@@ -15,6 +15,7 @@ public class SearchResult extends AppCompatActivity {
     private RecyclerView.LayoutManager layout;
     private RecyclerView.Adapter adapter;
     private List<Clinic> ClinicList;
+    private List<Float> ratingsList;
     Intent intent;
 
     @Override
@@ -23,6 +24,7 @@ public class SearchResult extends AppCompatActivity {
         setContentView(R.layout.activity_searchresult);
 
         ClinicList = Search.ClinicList;
+        ratingsList = Search.ratingsList;
         intent = getIntent();
 
         //dropdown list
@@ -43,7 +45,7 @@ public class SearchResult extends AppCompatActivity {
 
             }
 
-    });
+    }, ratingsList);
        listClinic.setAdapter(adapter);
 
     }
