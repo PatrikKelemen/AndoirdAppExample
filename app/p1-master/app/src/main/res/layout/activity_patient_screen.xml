@@ -53,13 +53,6 @@
                 android:text="Search Clinics" />
 
             <Button
-                android:id="@+id/rateClinic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onRating"
-                android:text="Comment - Rate clinic" />
-
-            <Button
                 android:id="@+id/logOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

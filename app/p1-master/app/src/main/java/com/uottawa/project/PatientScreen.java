@@ -71,12 +71,6 @@ public class PatientScreen extends AppCompatActivity {
         finish();
     }
 
-    public void onRating(View view) {
-        //get activity about rating
-        Intent ratingPage = new Intent(this,Rating.class);
-        startActivity(ratingPage);
-    }
-
 
     /*public void onCancel(View view) {
         System.out.println("cancel");

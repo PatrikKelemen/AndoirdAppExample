@@ -102,10 +102,5 @@ public class Clinic {
     public String getID(){return id;}
     public void setID(String id){this.id=id;}
 
-    public void addCommentRating(String comment, float rating){
-        commentStorage.add(comment);
-        ratingStorage.add(rating);
-
-    }
 
 }
