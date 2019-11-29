@@ -88,4 +88,10 @@ public class Appointment {
     public String getID() {
         return id;
     }
+
+    public  boolean equals (Appointment b){
+        return (this.date == b.date && this.time == b.time && this.clinic == b.clinic );
+
+
+    }
 }

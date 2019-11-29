@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
@@ -28,6 +32,9 @@ public class Search extends AppCompatActivity {
     int[] openHours = {6,7,8,9};
     int[] closingHours = {3,4,5,6};
 
+    DatabaseReference databaseProducts;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +43,7 @@ public class Search extends AppCompatActivity {
         search = (Button) findViewById(R.id.button);
 
         ResultClinic = new ArrayList<>();
-
+        databaseProducts = FirebaseDatabase.getInstance().getReference("Clinics");
         //test clinicNameSearch
         ClinicList = new ArrayList<>();
         ClinicList.add(new Clinic("Clinic1"));
@@ -71,6 +78,31 @@ public class Search extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        databaseProducts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+                ClinicList.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Clinic clinic = postSnapshot.getValue(Clinic.class);
+                    ClinicList.add(clinic);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
+    }
+
+
     public void onBack(View view) {
         Intent myIntent = new Intent(this,PatientScreen.class);
         startActivity(myIntent);

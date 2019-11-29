@@ -9,10 +9,15 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RateClinic extends AppCompatActivity {
 
     private String clinic;
     private String username;
+
+    DatabaseReference database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,9 @@ public class RateClinic extends AppCompatActivity {
 
         clinic = intent.getStringExtra("clinic");
         username = intent.getStringExtra("username");
+
+        database = FirebaseDatabase.getInstance().getReference("Ratings");
+
     }
 
     public void onCancel(View view) {
@@ -41,6 +49,10 @@ public class RateClinic extends AppCompatActivity {
 
         Review review = new Review(clinic, username, ((EditText) findViewById(R.id.clinicComments)).getText().toString(), ((RatingBar) findViewById(R.id.clinicRating)).getRating());
         //add review to database
+        String id = database.push().getKey();
+
+        database.child(id).setValue(review);
+
 
         setResult(RESULT_OK, returnIntent);
         finish();

@@ -14,6 +14,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,10 +33,14 @@ public class BookAppointment extends AppCompatActivity implements BookAppointmen
     private RecyclerView possible;
     private LinearLayoutManager layout;
     private ArrayList<String> appointmentHours;
+    private ArrayList<Appointment> appointments;
     private BookingAdapter adapter;
     private OnBookingClick click;
     private String username;
     private String clinic;
+
+    DatabaseReference databaseClinicHours;
+    DatabaseReference databaseAppointments;
 
     public interface OnBookingClick {
         void clicked(String time);
@@ -44,6 +54,11 @@ public class BookAppointment extends AppCompatActivity implements BookAppointmen
         //add these to the intent
         clinic = getIntent().getStringExtra("clinic");
         username = getIntent().getStringExtra("username");
+
+        databaseClinicHours = FirebaseDatabase.getInstance().getReference("ClinicHours");
+        databaseAppointments = FirebaseDatabase.getInstance().getReference("Appointments");
+
+        appointments = new ArrayList<>();
 
         //get the clinic hours
         currentClinicHours = new Hours("marty");
@@ -79,6 +94,55 @@ public class BookAppointment extends AppCompatActivity implements BookAppointmen
         possible.setAdapter(adapter);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        databaseClinicHours.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Hours hours = postSnapshot.getValue(Hours.class);
+                    if (hours.getName().equals(clinic)){
+                        currentClinicHours = hours;
+                        break;
+                    }
+                }
+
+              updateScreen();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
+
+
+        databaseAppointments.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+                appointments.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Appointment appointment = postSnapshot.getValue(Appointment.class);
+                    appointments.add(appointment);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
+    }
+
+
+
     public void onCancel(View view){
         Intent returnIntent = new Intent();
         setResult(RESULT_OK, returnIntent);
@@ -89,13 +153,30 @@ public class BookAppointment extends AppCompatActivity implements BookAppointmen
     public void onBook(String time) {
         //check that the time hasn't already been taken
         //will need to get stuff out of the database for this
-        //if already taken
-        //Toast.makeText(getApplicationContext(), "Appointment is already taken", Toast.LENGTH_LONG).show();
 
         Appointment a = new Appointment(DateFormat.getDateInstance(DateFormat.MEDIUM).format(selectedDate), time, clinic, this.username);
-        //add appointment to database
 
-        Toast.makeText(getApplicationContext(),"Appointment Booked",Toast.LENGTH_LONG).show();
+        boolean check = true;
+        for (int count = 0 ; count < appointments.size() ; count++){
+            if (appointments.get(count).equals(a)){
+                check = true;
+                break;
+            }
+        }
+
+        if (check) {
+            Toast.makeText(getApplicationContext(), "Appointment is already taken", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            //add appointment to database
+
+            String id = databaseAppointments.push().getKey();
+
+            databaseAppointments.child(id).setValue(a);
+
+            Toast.makeText(getApplicationContext(), "Appointment Booked", Toast.LENGTH_LONG).show();
+        }
     }
 
     //reads from the database
