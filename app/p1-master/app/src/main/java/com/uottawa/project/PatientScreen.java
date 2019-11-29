@@ -1,5 +1,6 @@
 package com.uottawa.project;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class PatientScreen extends AppCompatActivity {
     private RecyclerView.LayoutManager layout;
     private RecyclerView.Adapter adapter;
     private ArrayList appointments;
+    private AppointmentAdapter.AppointmentViewHolder forRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +39,26 @@ public class PatientScreen extends AppCompatActivity {
         currentAppointments.setLayoutManager(layout);
 
         appointments = new ArrayList<Appointment>();
-        appointments.add(new Appointment("Nov. 11, 2019","9:30", "Moe's", intent.getStringExtra("username")));
+        //get the appointments from database
 
-        appointments.add(new Appointment("Nov. 12, 2019","10:30", "Molly's", intent.getStringExtra("username")));
+        //for testing
+        //appointments.add(new Appointment("Nov. 11, 2019","9:30", "Moe's", intent.getStringExtra("username")));
+        //appointments.add(new Appointment("Nov. 12, 2019","10:30", "Molly's", intent.getStringExtra("username")));
 
         adapter = new AppointmentAdapter(appointments, new AppointmentAdapter.AppointmentViewListener() {
             @Override
-            public void onCancel(Appointment a) {
+            public void onCancel(Appointment a, AppointmentAdapter.AppointmentViewHolder holder) {
                 //System.out.println(a.getDate());
                 int index = appointments.indexOf(a);
                 appointments.remove(a);
                 //remove from database?
                 //should we notify the staff?
 
-                Toast.makeText(getApplicationContext(), "Appointment Cancelled", Toast.LENGTH_LONG).show();
+                if (holder.getCancel().getText().equals("Cancel")) {
+                    Toast.makeText(getApplicationContext(), "Appointment Cancelled", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Appointment Removed", Toast.LENGTH_LONG).show();
+                }
 
                 adapter.notifyItemRemoved(index);
             }
@@ -63,6 +72,7 @@ public class PatientScreen extends AppCompatActivity {
                     holder.getCancel().setEnabled(false);
                     Toast.makeText(getApplicationContext(), "Checked In", Toast.LENGTH_LONG).show();
                 } else {
+                    forRating = holder;
                     Intent intent = new Intent(getApplicationContext(), RateClinic.class);
                     intent.putExtra("clinic", a.getClinic());
                     intent.putExtra("patient", a.getPatient());
@@ -89,11 +99,18 @@ public class PatientScreen extends AppCompatActivity {
         startActivity(ratingPage);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);;
+        String returnType = data.getStringExtra("result");
 
-    /*public void onCancel(View view) {
-        System.out.println("cancel");
+        if (returnType.equals("post")) {
+            forRating.getCheckIn().setEnabled(false);
+            forRating.getCancel().setEnabled(true);
+            forRating.getCancel().setText("Remove");
+            Toast.makeText(getApplicationContext(), "Review Posted", Toast.LENGTH_LONG).show();
+        } else {
+            System.out.println(returnType);
+        }
     }
-    public void onCheckIn(View view) {
-        System.out.println("check in");
-    }*/
 }
