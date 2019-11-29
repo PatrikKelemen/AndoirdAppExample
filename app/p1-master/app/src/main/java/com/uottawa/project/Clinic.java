@@ -50,7 +50,9 @@ public class Clinic {
      * @param name a string with the name of the Clinic
      */
     public Clinic(String name) {
+
         this.name = name;
+
     }
 
 
@@ -85,6 +87,19 @@ public class Clinic {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
+    /**
+     * Sets the Openhours of operation of the Clinic.
+     */
+    public void setOpenHours(int[] hours) {
+        this.openHours = hours;
+    }
+
+    /**
+     * Sets the hours of operation of the Clinic.
+     */
+    public void setClosingHours(int[] hours) {
+        this.closeHours = hours;
+    }
     /**
      * Adds the employee to the clinic.
      * @param employee the employee to be added

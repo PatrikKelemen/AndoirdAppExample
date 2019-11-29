@@ -59,6 +59,7 @@
                 android:onClick="onLogout"
                 android:text="Log Out" />
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

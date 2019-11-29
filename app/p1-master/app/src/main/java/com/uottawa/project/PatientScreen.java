@@ -74,7 +74,8 @@ public class PatientScreen extends AppCompatActivity {
     }
 
     public void onSearchClinics(View view) {
-
+        Intent myIntent = new Intent(this,Search.class);
+        startActivity(myIntent);
     }
     public void onLogout(View view) {
         //get activity about rating
