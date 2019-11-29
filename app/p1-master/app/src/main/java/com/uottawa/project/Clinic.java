@@ -108,4 +108,7 @@ public class Clinic {
 
     }
 
+    public ArrayList<Service>  getServices() {
+        return services;
+    }
 }
