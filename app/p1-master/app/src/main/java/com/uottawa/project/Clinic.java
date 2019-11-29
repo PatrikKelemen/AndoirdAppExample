@@ -29,6 +29,16 @@ public class Clinic {
      */
     private int[] closeHours;
 
+    /*
+     * The arraylist of comments of the clinic.
+     */
+    private ArrayList<String> commentStorage= new ArrayList<>();
+
+    /*
+     * The arraylist of rating of the clinic.
+     */
+    private ArrayList<Float> ratingStorage= new ArrayList<>();
+
     private String id;
 
 
@@ -91,5 +101,11 @@ public class Clinic {
     }
     public String getID(){return id;}
     public void setID(String id){this.id=id;}
+
+    public void addCommentRating(String comment, float rating){
+        commentStorage.add(comment);
+        ratingStorage.add(rating);
+
+    }
 
 }
