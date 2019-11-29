@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PatientScreen"></activity>
+        <activity android:name=".RateClinic"></activity>
+        <activity android:name=".PatientScreen" />
         <activity android:name=".ClinicServiceOptions" />
+        <activity android:name=".Rating" />
         <activity android:name=".ClinicServices" />
         <activity android:name=".ClinicHours" />
         <activity android:name=".EmployeeHours" />

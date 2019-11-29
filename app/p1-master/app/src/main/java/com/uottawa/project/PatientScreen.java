@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -44,14 +45,16 @@ public class PatientScreen extends AppCompatActivity {
         appointments = new ArrayList<Appointment>();
 
         database = FirebaseDatabase.getInstance().getReference("");
-        appointments.add(new Appointment("Nov. 11, 2019","9:30", new Clinic(), new Patient("","d","","","")));
 
-        appointments.add(new Appointment("Nov. 12, 2019","10:30", new Clinic(), new Patient("","d","","","")));
+        appointments.add(new Appointment("Nov. 11, 2019","9:30", "Moe's", intent.getStringExtra("username")));
+
+
+        appointments.add(new Appointment("Nov. 12, 2019","10:30", "Molly's", intent.getStringExtra("username")));
 
         adapter = new AppointmentAdapter(appointments, new AppointmentAdapter.AppointmentViewListener() {
             @Override
             public void onCancel(Appointment a) {
-                System.out.println(a.getDate());
+                //System.out.println(a.getDate());
                 int index = appointments.indexOf(a);
                 appointments.remove(a);
                 //remove from database?
@@ -63,8 +66,19 @@ public class PatientScreen extends AppCompatActivity {
             }
 
             @Override
-            public void onCheckIn(Appointment a) {
-                System.out.println(a.getTime());
+            public void onCheckIn(Appointment a, AppointmentAdapter.AppointmentViewHolder holder) {
+                //System.out.println(a.getTime());
+                if (! a.isCheckedIn()) {
+                    a.checkIn();
+                    holder.getCheckIn().setText("Review Visit");
+                    holder.getCancel().setEnabled(false);
+                    Toast.makeText(getApplicationContext(), "Checked In", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), RateClinic.class);
+                    intent.putExtra("clinic", a.getClinic());
+                    intent.putExtra("patient", a.getPatient());
+                    startActivityForResult(intent, 0);
+                }
             }
         });
         currentAppointments.setAdapter(adapter);
@@ -104,10 +118,19 @@ public class PatientScreen extends AppCompatActivity {
 
     }
     public void onLogout(View view) {
-        Intent returnIntent = new Intent();
-        setResult(RESULT_OK, returnIntent);
+        //get activity about rating
+        Intent myIntent = new Intent(this,MainActivity.class);
+        startActivity(myIntent);
         finish();
     }
+
+    public void onRating(View view) {
+        //get activity about rating
+        Intent ratingPage = new Intent(this,Rating.class);
+        startActivity(ratingPage);
+    }
+
+
     /*public void onCancel(View view) {
         System.out.println("cancel");
     }

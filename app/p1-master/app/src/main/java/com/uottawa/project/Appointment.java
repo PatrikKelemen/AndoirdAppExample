@@ -13,21 +13,26 @@ public class Appointment {
     private String time;
 
     /*
-     * Stores the clinic the appointment is booked at.
+     * Stores the name of clinic the appointment is booked at.
      */
-    private Clinic clinic;
+    private String clinic;
 
     /*
-     * Stores the Patient the appointment is booked for.
+     * Stores the name of Patient the appointment is booked for.
      */
-    private Patient patient;
+    private String patient;
 
     /*
      * The id of the appointment in the database.
      */
     private String id;
 
-    public Appointment(String date, String time, Clinic clinic, Patient patient) {
+    /*
+     * True if the patient has checked in for the appointment.
+     */
+    private boolean checkedIn;
+
+    public Appointment(String date, String time, String clinic, String patient) {
         this.date = date;
         this.time = time;
         this.clinic = clinic;
@@ -36,19 +41,27 @@ public class Appointment {
 
     public Appointment() {}
 
-    public Clinic getClinic() {
+    public void checkIn() {
+        this.checkedIn = true;
+    }
+
+    public boolean isCheckedIn() {
+        return this.checkedIn;
+    }
+
+    public String getClinic() {
         return clinic;
     }
 
-    public void setClinic(Clinic clinic) {
+    public void setClinic(String clinic) {
         this.clinic = clinic;
     }
 
-    public Patient getPatient() {
+    public String getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(String patient) {
         this.patient = patient;
     }
 
