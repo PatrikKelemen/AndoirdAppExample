@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     List<Account> users;
     private DbHandler mydb = new DbHandler();
     DatabaseReference Clinics;
-    List<Clinic> ClinicList;
+    static ArrayList<Clinic> ClinicList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,12 @@ public class MainActivity extends AppCompatActivity {
         users = new ArrayList<>();
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
-        ClinicList = new ArrayList<>();
+        ClinicList = new ArrayList<Clinic>();
+
+        //for test default clinic
+        ClinicList.add(new Clinic("Clinic1"));
+        ClinicList.add(new Clinic("Clinic2"));
+
         Clinics = FirebaseDatabase.getInstance().getReference("Clinics");
     }
 
