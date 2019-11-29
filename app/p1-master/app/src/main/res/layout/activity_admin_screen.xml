@@ -46,6 +46,13 @@
                 android:text="Manage Accounts" />
 
             <Button
+                android:id="@+id/btnClinics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onManageClinics"
+                android:text="Manage Clinics" />
+
+            <Button
                 android:id="@+id/logOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
