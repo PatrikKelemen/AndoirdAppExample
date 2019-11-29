@@ -27,6 +27,7 @@ public class PatientScreen extends AppCompatActivity {
     private RecyclerView.LayoutManager layout;
     private RecyclerView.Adapter adapter;
     private ArrayList appointments;
+    private String username;
 
     DatabaseReference database;
     Intent intent;
@@ -43,7 +44,7 @@ public class PatientScreen extends AppCompatActivity {
 
         TextView welcome = (TextView) findViewById(R.id.welcomeMsg);
         welcome.setText("Welcome "+intent.getStringExtra("username")+". You are logged in as a Patient.");
-
+        username = intent.getStringExtra("username");
         currentAppointments = (RecyclerView) findViewById(R.id.currentAppointments);
 
         layout = new LinearLayoutManager(this);
@@ -54,10 +55,6 @@ public class PatientScreen extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance().getReference("Appointments");
 
-        appointments.add(new Appointment("Nov. 11, 2019","9:30", "Moe's", intent.getStringExtra("username")));
-
-
-        appointments.add(new Appointment("Nov. 12, 2019","10:30", "Molly's", intent.getStringExtra("username")));
 
         //get the appointments from database
 
@@ -72,6 +69,8 @@ public class PatientScreen extends AppCompatActivity {
                 //System.out.println(a.getDate());
                 int index = appointments.indexOf(a);
                 appointments.remove(a);
+                DatabaseReference dR = database.child(a.getID());
+                dR.removeValue();
                 //remove from database?
                 //should we notify the staff?
 
@@ -98,6 +97,8 @@ public class PatientScreen extends AppCompatActivity {
                     intent.putExtra("clinic", a.getClinic());
                     intent.putExtra("patient", a.getPatient());
                     startActivityForResult(intent, 0);
+                    DatabaseReference dR = database.child(a.getID());
+                    dR.removeValue();
                 }
             }
         });
@@ -133,12 +134,38 @@ public class PatientScreen extends AppCompatActivity {
 
     }
 
+    private void runDatabase () {
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                appointments.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Appointment appointment = postSnapshot.getValue(Appointment.class);
+                    if (appointment.getPatient().equals(intent.getStringExtra("username")))
+                        appointments.add(appointment);
+                }
+                System.out.println("database");
+
+
+                currentAppointments.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ...
+            }
+        });
+
+    }
 
     public void onSearchClinics(View view) {
 
         Intent myIntent = new Intent(this,Search.class);
+        myIntent.putExtra("username",intent.getStringExtra("username"));
         startActivity(myIntent);
 
+        runDatabase();
 
         //how to call the booking appointment activity:
         //have a button the Clinic's page in the search that when clicked allows the patient to book

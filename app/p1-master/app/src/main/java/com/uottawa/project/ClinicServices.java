@@ -39,8 +39,8 @@ public class ClinicServices extends AppCompatActivity {
 
         databaseService = FirebaseDatabase.getInstance().getReference("Services");
         databaseClinics = FirebaseDatabase.getInstance().getReference("Clinics");
-        listViewAllServices = (ListView) findViewById(R.id.currentServiceList);
-        listViewCurrentServices = (ListView) findViewById(R.id.allServiceList);
+        listViewAllServices = (ListView) findViewById(R.id.allServiceList);
+        listViewCurrentServices = (ListView) findViewById(R.id.currentServiceList);
         services = new ArrayList<>();
 
         Intent welcome = this.getIntent();

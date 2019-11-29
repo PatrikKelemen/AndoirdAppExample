@@ -31,13 +31,14 @@ public class Search extends AppCompatActivity {
     List<Clinic> ResultClinic;
     int[] openHours = {6,7,8,9};
     int[] closingHours = {3,4,5,6};
-
+    Intent intent;
     DatabaseReference databaseProducts;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        intent = getIntent();
         setContentView(R.layout.activity_search);
         SearchBox = (EditText) findViewById(R.id.text_input);
         search = (Button) findViewById(R.id.button);
@@ -106,12 +107,12 @@ public class Search extends AppCompatActivity {
 
 
     public void onBack(View view) {
-        Intent myIntent = new Intent(this,PatientScreen.class);
-        startActivity(myIntent);
+        finish();
     }
 
     public void onSearch(View view) {
         Intent myIntent = new Intent(this,SearchResult.class);
+        myIntent.putExtra("username",intent.getStringExtra("username"));
         startActivity(myIntent);
     }
 

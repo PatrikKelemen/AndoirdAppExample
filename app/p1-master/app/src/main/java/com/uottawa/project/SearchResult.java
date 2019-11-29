@@ -1,5 +1,6 @@
 package com.uottawa.project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ public class SearchResult extends AppCompatActivity {
     private RecyclerView.LayoutManager layout;
     private RecyclerView.Adapter adapter;
     private List<Clinic> ClinicList;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,21 +23,24 @@ public class SearchResult extends AppCompatActivity {
         setContentView(R.layout.activity_searchresult);
 
         ClinicList = Search.ClinicList;
+        intent = getIntent();
 
         //dropdown list
         listClinic = (RecyclerView) findViewById(R.id.listSearchResult);
         layout = new LinearLayoutManager(this);
         listClinic.setLayoutManager(layout);
-
+        final Intent newIntent = new Intent(this,BookAppointment.class);
         adapter = new searchAdapter(ClinicList, new searchAdapter.searchViewListener() {
 
             @Override
             public void onSelect(Clinic a) {
-                System.out.println(a.getName());
-                int index = ClinicList.indexOf(a);
-                ClinicList.remove(a);
+
                 Toast.makeText(getApplicationContext(), "Clinic selected: "+ a.getName(), Toast.LENGTH_LONG).show();
-                adapter.notifyItemRemoved(index);
+
+                newIntent.putExtra("username",intent.getStringExtra("username"));
+                newIntent.putExtra("clinic",a.getName());
+                startActivityForResult(newIntent, 0);
+
             }
 
     });

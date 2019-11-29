@@ -156,7 +156,7 @@ public class BookAppointment extends AppCompatActivity implements BookAppointmen
 
         Appointment a = new Appointment(DateFormat.getDateInstance(DateFormat.MEDIUM).format(selectedDate), time, clinic, this.username);
 
-        boolean check = true;
+        boolean check = false;
         for (int count = 0 ; count < appointments.size() ; count++){
             if (appointments.get(count).equals(a)){
                 check = true;
@@ -172,7 +172,7 @@ public class BookAppointment extends AppCompatActivity implements BookAppointmen
             //add appointment to database
 
             String id = databaseAppointments.push().getKey();
-
+            a.setID(id);
             databaseAppointments.child(id).setValue(a);
 
             Toast.makeText(getApplicationContext(), "Appointment Booked", Toast.LENGTH_LONG).show();
