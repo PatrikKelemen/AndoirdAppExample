@@ -89,6 +89,8 @@ public class BookAppointment extends AppCompatActivity implements BookAppointmen
     public void onBook(String time) {
         //check that the time hasn't already been taken
         //will need to get stuff out of the database for this
+        //if already taken
+        //Toast.makeText(getApplicationContext(), "Appointment is already taken", Toast.LENGTH_LONG).show();
 
         Appointment a = new Appointment(DateFormat.getDateInstance(DateFormat.MEDIUM).format(selectedDate), time, clinic, this.username);
         //add appointment to database

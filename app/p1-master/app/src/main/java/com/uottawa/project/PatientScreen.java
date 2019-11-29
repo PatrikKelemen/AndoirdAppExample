@@ -85,6 +85,14 @@ public class PatientScreen extends AppCompatActivity {
 
     public void onSearchClinics(View view) {
 
+        //how to call the booking appointment activity:
+        //have a button the Clinic's page in the search that when clicked allows the patient to book
+        //an appointment, then use this code below
+        /*Intent intent = new Intent(getApplicationContext(), BookAppointment.class);
+        intent.putExtra("username", "Joe");
+        intent.putExtra("clinic", "Bill");
+        startActivityForResult(intent, 0);*/
+
     }
     public void onLogout(View view) {
         //get activity about rating
