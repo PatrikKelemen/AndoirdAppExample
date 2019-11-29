@@ -50,7 +50,9 @@ public class Clinic {
      * @param name a string with the name of the Clinic
      */
     public Clinic(String name) {
+
         this.name = name;
+
     }
 
 
@@ -86,6 +88,19 @@ public class Clinic {
     }
 
     /**
+     * Sets the Openhours of operation of the Clinic.
+     */
+    public void setOpenHours(int[] hours) {
+        this.openHours = hours;
+    }
+
+    /**
+     * Sets the hours of operation of the Clinic.
+     */
+    public void setClosingHours(int[] hours) {
+        this.closeHours = hours;
+    }
+    /**
      * Adds the employee to the clinic.
      * @param employee the employee to be added
      */
@@ -102,11 +117,6 @@ public class Clinic {
     public String getID(){return id;}
     public void setID(String id){this.id=id;}
 
-    public void addCommentRating(String comment, float rating){
-        commentStorage.add(comment);
-        ratingStorage.add(rating);
-
-    }
 
     public ArrayList<Service>  getServices() {
         return services;

@@ -135,6 +135,10 @@ public class PatientScreen extends AppCompatActivity {
 
 
     public void onSearchClinics(View view) {
+<<<<<<< HEAD
+        Intent myIntent = new Intent(this,Search.class);
+        startActivity(myIntent);
+=======
 
         //how to call the booking appointment activity:
         //have a button the Clinic's page in the search that when clicked allows the patient to book
@@ -144,6 +148,7 @@ public class PatientScreen extends AppCompatActivity {
         intent.putExtra("clinic", "Bill");
         startActivityForResult(intent, 0);*/
 
+>>>>>>> fa764b05b123870dba1bc269ae04edb213c99c60
     }
     public void onLogout(View view) {
         //get activity about rating
@@ -152,6 +157,11 @@ public class PatientScreen extends AppCompatActivity {
         finish();
     }
 
+<<<<<<< HEAD
+
+    /*public void onCancel(View view) {
+        System.out.println("cancel");
+=======
     public void onRating(View view) {
         //get activity about rating
         Intent ratingPage = new Intent(this,Rating.class);
@@ -171,5 +181,6 @@ public class PatientScreen extends AppCompatActivity {
         } else {
             System.out.println(returnType);
         }
+>>>>>>> fa764b05b123870dba1bc269ae04edb213c99c60
     }
 }
