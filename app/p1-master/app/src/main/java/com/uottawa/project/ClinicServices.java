@@ -25,4 +25,27 @@ public class ClinicServices extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ClinicServiceOptions.class);
         startActivityForResult(intent, 0);
     }
+
+    public void addService (Service service){
+        boolean check = false
+        for (int count = 0 ; count < clinic.getServices().getSize() ; count++){
+            if ((clinic.getServices().get(count).getName()).equals (service.getName())){
+               check = true;
+               break;
+            }
+        }
+
+        if (check == false){
+            clinic.addService(service)
+        }
+    }
+
+    public void removeService (Service service){
+        for (int count = 0 ; count < clinic.getServices().getSize() ; count++){
+            if ((clinic.getServices().get(count).getName()).equals (service.getName())){
+                clinic.removeService(service)
+                break;
+            }
+        }
+    }
 }
