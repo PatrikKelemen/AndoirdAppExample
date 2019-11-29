@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RateClinic"></activity>
+        <activity android:name=".BookAppointment"></activity>
+        <activity android:name=".RateClinic" />
         <activity android:name=".PatientScreen" />
         <activity android:name=".ClinicServiceOptions" />
         <activity android:name=".Rating" />
