@@ -1,5 +1,6 @@
 package com.uottawa.project;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class PatientScreen extends AppCompatActivity {
     private RecyclerView.LayoutManager layout;
     private RecyclerView.Adapter adapter;
     private ArrayList appointments;
+    private AppointmentAdapter.AppointmentViewHolder forRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +39,26 @@ public class PatientScreen extends AppCompatActivity {
         currentAppointments.setLayoutManager(layout);
 
         appointments = new ArrayList<Appointment>();
-        appointments.add(new Appointment("Nov. 11, 2019","9:30", "Moe's", intent.getStringExtra("username")));
+        //get the appointments from database
 
-        appointments.add(new Appointment("Nov. 12, 2019","10:30", "Molly's", intent.getStringExtra("username")));
+        //for testing
+        //appointments.add(new Appointment("Nov. 11, 2019","9:30", "Moe's", intent.getStringExtra("username")));
+        //appointments.add(new Appointment("Nov. 12, 2019","10:30", "Molly's", intent.getStringExtra("username")));
 
         adapter = new AppointmentAdapter(appointments, new AppointmentAdapter.AppointmentViewListener() {
             @Override
-            public void onCancel(Appointment a) {
+            public void onCancel(Appointment a, AppointmentAdapter.AppointmentViewHolder holder) {
                 //System.out.println(a.getDate());
                 int index = appointments.indexOf(a);
                 appointments.remove(a);
                 //remove from database?
                 //should we notify the staff?
 
-                Toast.makeText(getApplicationContext(), "Appointment Cancelled", Toast.LENGTH_LONG).show();
+                if (holder.getCancel().getText().equals("Cancel")) {
+                    Toast.makeText(getApplicationContext(), "Appointment Cancelled", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Appointment Removed", Toast.LENGTH_LONG).show();
+                }
 
                 adapter.notifyItemRemoved(index);
             }
@@ -63,6 +72,7 @@ public class PatientScreen extends AppCompatActivity {
                     holder.getCancel().setEnabled(false);
                     Toast.makeText(getApplicationContext(), "Checked In", Toast.LENGTH_LONG).show();
                 } else {
+                    forRating = holder;
                     Intent intent = new Intent(getApplicationContext(), RateClinic.class);
                     intent.putExtra("clinic", a.getClinic());
                     intent.putExtra("patient", a.getPatient());
@@ -74,8 +84,20 @@ public class PatientScreen extends AppCompatActivity {
     }
 
     public void onSearchClinics(View view) {
+<<<<<<< HEAD
         Intent myIntent = new Intent(this,Search.class);
         startActivity(myIntent);
+=======
+
+        //how to call the booking appointment activity:
+        //have a button the Clinic's page in the search that when clicked allows the patient to book
+        //an appointment, then use this code below
+        /*Intent intent = new Intent(getApplicationContext(), BookAppointment.class);
+        intent.putExtra("username", "Joe");
+        intent.putExtra("clinic", "Bill");
+        startActivityForResult(intent, 0);*/
+
+>>>>>>> fa764b05b123870dba1bc269ae04edb213c99c60
     }
     public void onLogout(View view) {
         //get activity about rating
@@ -84,11 +106,30 @@ public class PatientScreen extends AppCompatActivity {
         finish();
     }
 
+<<<<<<< HEAD
 
     /*public void onCancel(View view) {
         System.out.println("cancel");
+=======
+    public void onRating(View view) {
+        //get activity about rating
+        Intent ratingPage = new Intent(this,Rating.class);
+        startActivity(ratingPage);
     }
-    public void onCheckIn(View view) {
-        System.out.println("check in");
-    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);;
+        String returnType = data.getStringExtra("result");
+
+        if (returnType.equals("post")) {
+            forRating.getCheckIn().setEnabled(false);
+            forRating.getCancel().setEnabled(true);
+            forRating.getCancel().setText("Remove");
+            Toast.makeText(getApplicationContext(), "Review Posted", Toast.LENGTH_LONG).show();
+        } else {
+            System.out.println(returnType);
+        }
+>>>>>>> fa764b05b123870dba1bc269ae04edb213c99c60
+    }
 }

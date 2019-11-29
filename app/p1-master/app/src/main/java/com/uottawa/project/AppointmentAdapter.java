@@ -43,7 +43,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     }
 
     public interface AppointmentViewListener {
-        public void onCancel(Appointment a);
+        public void onCancel(Appointment a, AppointmentViewHolder holder);
         public void onCheckIn(Appointment a, AppointmentViewHolder holder);
     }
 
@@ -75,7 +75,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click.onCancel(a);
+                click.onCancel(a, holder);
             }
         });
     }
