@@ -23,7 +23,7 @@ public class SearchResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchresult);
 
-        ClinicList = Search.ClinicList;
+        ClinicList = Search.ResultClinic;
         ratingsList = Search.ratingsList;
         intent = getIntent();
 

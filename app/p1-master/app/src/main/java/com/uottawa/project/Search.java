@@ -2,6 +2,7 @@ package com.uottawa.project;
 
 
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,12 +30,13 @@ public class Search extends AppCompatActivity {
     EditText SearchBox;
     static List<Clinic> ClinicList;
     static List<Float> ratingsList;
-    List<Clinic> ResultClinic;
+    static List<Review> intaialratingsList;
+    static List<Clinic> ResultClinic;
     int[] openHours = {6,7,8,9};
     int[] closingHours = {3,4,5,6};
     Intent intent;
     DatabaseReference databaseProducts;
-
+    DatabaseReference databaseRatings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,9 @@ public class Search extends AppCompatActivity {
 
         ResultClinic = new ArrayList<>();
         ratingsList = new ArrayList<>();
+        intaialratingsList = new ArrayList<>();
         databaseProducts = FirebaseDatabase.getInstance().getReference("Clinics");
+        databaseRatings = FirebaseDatabase.getInstance().getReference("Ratings");
         //test clinicNameSearch
         ClinicList = new ArrayList<>();
         ClinicList.add(new Clinic("Clinic1"));
@@ -71,11 +75,30 @@ public class Search extends AppCompatActivity {
                             ResultClinic.add(item);
                             //return item
                             Toast.makeText(getApplicationContext(), item.getName(), Toast.LENGTH_SHORT).show();
-                            onSearch(v);
+
                             break breakLoop;
                         }
                     }
+                    for (int i = 0; i < ResultClinic.size(); i++) {
+                        ratingsList.add((float)0.0);
+                    }
 
+                    for (int j =0; j< ResultClinic.size(); j++) {
+
+                        int counter =0;
+
+
+                        for (int i = 0; i < intaialratingsList.size(); i++) {
+                            if (intaialratingsList.get(i).getClinic().equals(ResultClinic.get(j).getName())){
+                                counter++;
+                                ratingsList.set(j, ratingsList.get(j) + intaialratingsList.get(i).getRating());
+                            }
+                        }
+                        if (counter !=0) {
+                            ratingsList.set(j, ratingsList.get(j) / counter);
+                        }
+                    }
+                    onSearch(v);
                 }
 
 
@@ -96,6 +119,24 @@ public class Search extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Clinic clinic = postSnapshot.getValue(Clinic.class);
                     ClinicList.add(clinic);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError){
+
+            }
+        });
+
+        databaseRatings.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+                intaialratingsList.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    Review rating = postSnapshot.getValue(Review.class);
+                    intaialratingsList.add(rating);
                 }
 
             }
