@@ -32,11 +32,19 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             this.cancel = (Button) itemView.findViewById(R.id.cancelAppointBtn);
             this.checkIn = (Button) itemView.findViewById(R.id.checkInBtn);
         }
+
+        public Button getCheckIn() {
+            return checkIn;
+        }
+
+        public Button getCancel() {
+            return cancel;
+        }
     }
 
     public interface AppointmentViewListener {
         public void onCancel(Appointment a);
-        public void onCheckIn(Appointment a);
+        public void onCheckIn(Appointment a, AppointmentViewHolder holder);
     }
 
     public AppointmentAdapter(List<Appointment> appointments, AppointmentViewListener click) {
@@ -52,15 +60,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     }
 
     @Override
-    public void onBindViewHolder(AppointmentViewHolder holder, final int position) {
+    public void onBindViewHolder(final AppointmentViewHolder holder, final int position) {
         final Appointment a = this.appointments.get(position);
-        holder.clinic.setText(a.getClinic().getName());
+        holder.clinic.setText(a.getClinic());
         holder.time.setText(a.getDate()+" at "+a.getTime());
 
         holder.checkIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click.onCheckIn(a);
+                click.onCheckIn(a, holder);
             }
         });
 
