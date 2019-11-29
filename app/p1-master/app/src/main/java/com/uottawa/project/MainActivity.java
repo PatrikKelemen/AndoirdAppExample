@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (dbUser.getAccountType().equals("Employee")) {
                     //check if employee is part of a clinic
                     boolean hasClinic = false;
-                    Clinic employeesClinic = ClinicList.get(1);
+                    Clinic employeesClinic= null;
 
                     for (int i = 0; i< ClinicList.size();i++){
                         ArrayList<Employee> next = ClinicList.get(i).getEmployees();

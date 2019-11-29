@@ -1,30 +1,22 @@
 package com.uottawa.project;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Hours {
 
-    private class SingleHour {
 
-        private long day;
-
-        private int start;
-
-        private int end;
-
-        private SingleHour(long day, int start, int end) {
-            this.start = start;
-            this.end = end;
-            this.day = day;
-        }
-    }
 
     private String id;
 
-    private ArrayList<SingleHour> specialHours;
+    private List<SingleHour> specialHours = new ArrayList<>();;
 
-    private SingleHour[] weeklyHours;
+    private List<SingleHour> weeklyHours = new ArrayList<>();;
 
     private String name;
 
@@ -35,20 +27,21 @@ public class Hours {
     public Hours(String name) {
         this.name = name;
         this.specialHours = new ArrayList<>();
-        this.weeklyHours = new SingleHour[7];
+        this.weeklyHours = new ArrayList<>();
 
-        this.weeklyHours[0] = new SingleHour(0, -1, -1);
+        this.weeklyHours.add(new SingleHour(0, -1, -1));
 
         for (int i = 1; i < 6; i++) {
-            this.weeklyHours[i] = new SingleHour(0, 8, 17);
+            this.weeklyHours.add(new SingleHour(0, 8, 17));
         }
-        this.weeklyHours[6] = new SingleHour(0, -1, -1);
+        this.weeklyHours.add(new SingleHour(0, -1, -1));
     }
 
     /*
      * Returns an array with the start and end hours given the date in a long
      * of milliseconds since January 1 1970. Returns null if the not working.
      */
+    @Exclude
     public int[] getHours(long date) {
         //can't compare longs for specific days because the numbers change for some reason..
         DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
@@ -79,7 +72,7 @@ public class Hours {
             day = 6;
         }
 
-        int[] toReturn = {this.weeklyHours[day].start, this.weeklyHours[day].end};
+        int[] toReturn = {this.weeklyHours.get(day).start, this.weeklyHours.get(day).end};
         if (toReturn[0] == -1 || toReturn[1] == -1) {
             return null;
         }
@@ -105,8 +98,8 @@ public class Hours {
                 day = 6;
             }
 
-            this.weeklyHours[day].start = start;
-            this.weeklyHours[day].end = end;
+            this.weeklyHours.get(day).start = start;
+            this.weeklyHours.get(day).end = end;
 
         } else {
             //look for special hour first
@@ -132,19 +125,19 @@ public class Hours {
         this.id = id;
     }
 
-    public ArrayList<SingleHour> getSpecialHours() {
+    public List<SingleHour> getSpecialHours() {
         return specialHours;
     }
 
-    public void setSpecialHours(ArrayList<SingleHour> specialHours) {
+    public void setSpecialHours(List<SingleHour> specialHours) {
         this.specialHours = specialHours;
     }
 
-    public SingleHour[] getWeeklyHours() {
+    public List<SingleHour> getWeeklyHours() {
         return weeklyHours;
     }
 
-    public void setWeeklyHours(SingleHour[] weeklyHours) {
+    public void setWeeklyHours(List<SingleHour> weeklyHours) {
         this.weeklyHours = weeklyHours;
     }
 

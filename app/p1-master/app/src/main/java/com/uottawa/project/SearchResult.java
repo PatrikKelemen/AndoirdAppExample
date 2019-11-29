@@ -19,7 +19,7 @@ public class SearchResult extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchresult);
-/*
+
         ClinicList = Search.ClinicList;
 
         //dropdown list
@@ -38,9 +38,9 @@ public class SearchResult extends AppCompatActivity {
                 adapter.notifyItemRemoved(index);
             }
 
-    };
-       // listClinic.setAdapter(adapter);
-*/
+    });
+       listClinic.setAdapter(adapter);
+
     }
 }
 

@@ -68,9 +68,11 @@ public class Search extends AppCompatActivity {
                             ResultClinic.add(item);
                             //return item
                             Toast.makeText(getApplicationContext(), item.getName(), Toast.LENGTH_SHORT).show();
+                            onSearch(v);
                             break breakLoop;
                         }
                     }
+
                 }
 
 
