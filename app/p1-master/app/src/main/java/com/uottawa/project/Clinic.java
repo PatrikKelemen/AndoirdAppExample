@@ -22,12 +22,12 @@ public class Clinic {
     /*
      * The array of hours the Clinic opens at.
      */
-    private int[] openHours;
+    protected int[] openHours;
 
     /*
      * The array of hours the Clinic closes at.
      */
-    private int[] closeHours;
+    protected int[] closeHours;
 
     /*
      * The arraylist of comments of the clinic.
@@ -82,8 +82,9 @@ public class Clinic {
 
     /**
      * Sets the hours of operation of the Clinic.
+     * @param hours
      */
-    public void setHours() {
+    public void setHours(int[] hours) {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
@@ -111,12 +112,14 @@ public class Clinic {
     public ArrayList<Employee> getEmployees() {
         return employees;
     }
+
     public String getName() {
         return name;
     }
-    public String getID(){return id;}
-    public void setID(String id){this.id=id;}
 
+    public String getID(){return id;}
+
+    public void setID(String id){this.id=id;}
 
     public ArrayList<Service>  getServices() {
         return services;
