@@ -66,3 +66,6 @@ The purpose of this deliverable was to:
 Additional Notes:
 - Note: Database was changed to Firebase from SQLite in Deliverable 1, google-services.json is not tracked by GitHub for security purposes, the APK will work 
 - There is one Admin account. The login is username: admin, password: 5T5ptQ
+
+## Deliverable 4
+[![CircleCI](https://circleci.com/gh/mat2020/TestCircleCi.svg?style=svg)](https://circleci.com/gh/mat2020/TestCircleCi)
