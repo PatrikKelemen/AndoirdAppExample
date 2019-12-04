@@ -91,7 +91,5 @@ public class Appointment {
 
     public  boolean equals (Appointment b){
         return (this.date == b.date && this.time == b.time && this.clinic == b.clinic );
-
-
     }
 }

@@ -56,7 +56,7 @@ exposed to risk. That way we could upload the google-services.json file so that 
 Right near the end of developping our app we discovered how to store links between objects in the database. Throughtout
 our entire app when we needed to link anything to an account or clinic we would save the name of the specific account
 or clinic in the instance variables of the object. Then when we got the object from the database we would search and 
-find the account or clinic that had that name. This is why our UML looks like it is missing associations. 
+find the account or clinic that had that name.
 We couldn't figure out how to store links between objects until the very
 end when it was already too late to change everything. However, we now know how to do this for our next project.
 

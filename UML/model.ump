@@ -38,6 +38,14 @@ class Appointment {
   * -- 1 Clinic;
 }
 
+class Review {
+  String id;
+  String comment;
+  Float rating;
+  * -- 1 Patient;
+  * -- 1 Clinic;
+}
+
 class Service{
   float rate;
   String name;
