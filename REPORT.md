@@ -24,11 +24,12 @@ waiting time and rating from patients.
 ## Team Roles
 
 |Team Member| Deliverable 1| Deliverable 2| Deliverable 3| Deliverable 4|
-|Patrik Kelemen |  | | | |
-| Nolan Belnap |  | | | |
-| Angelica Paynter | | | | | 
-| Zhen Wang |  | | | |
-| Mathieu Bellefeuille | | | | |
+|---|---|---|---|---|
+|Patrik Kelemen | x |x | x|x |
+| Nolan Belnap |  x|x |x | x|
+| Angelica Paynter |x | x| x|x | 
+| Zhen Wang |  x|x | x| x|
+| Mathieu Bellefeuille | x|x |x |x |
 
 ## App Screenshots
 
