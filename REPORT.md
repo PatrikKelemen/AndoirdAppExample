@@ -1,7 +1,9 @@
 # Final Report
 
 **Team Variable: Patrik Kelemen, Nolan Belnap, Angelica Paynter, Zhen Wang, Mathieu Bellefeuille**
+
 **SEG 2105, Prof Andrew Forward**
+
 **Due: Dec. 4, 2019**
 
 ## Introduction
