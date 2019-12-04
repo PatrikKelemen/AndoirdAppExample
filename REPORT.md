@@ -39,6 +39,50 @@ waiting time and rating from patients.
 
 ## App Screenshots
 
+Login screen
+
+![Login Screen](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/loginScreen.png)
+
+Register screen
+
+![Register Screen](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/register.png)
+
+Admin screen
+
+![Admin Screen](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/adminScreen.png)
+
+Admin managing accounts
+
+![Manage Accounts](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageAccounts.png)
+
+Admin managing services
+
+![Manage Services](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageServices.png)
+
+Admin managing clinics
+
+![Manage Clinics](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageClinics.png)
+
+Employee screen without clinic
+
+![Employee Screen with No Clinic](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/employeeScreenNoClinic.png)
+
+Employee screen with clinic
+
+![Employee Screen](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/employeeScreen.png)
+
+Employee managing clinic's services
+
+![Manage Clinic Services](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageClinicServices.png)
+
+Employee managing clinic's hours
+
+![Manage Clinic Hours](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageClinicHours.png)
+
+Employee managing their own hours
+
+![Manage Hours](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageHours.png)
+
 ## Lessons Learned
 
 In building this app we learned many things by overcoming the numerous challenges we encountered. The largest of these challenges was to 
