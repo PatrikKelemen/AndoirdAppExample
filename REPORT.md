@@ -23,6 +23,8 @@ waiting time and rating from patients.
 
 ## UML Class Diagram
 
+![final UML diagram](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/UML/UML_diagram_4.png)
+
 ## Team Roles
 
 |Team Member| Deliverable 1| Deliverable 2| Deliverable 3| Deliverable 4|
