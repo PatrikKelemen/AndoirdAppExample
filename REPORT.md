@@ -1,8 +1,8 @@
 # Final Report
 
-####Team Variable: Patrik Kelemen, Nolan Belnap, Angelica Paynter, Zhen Wang, Mathieu Bellefeuille
-####SEG 2105, Prof Andrew Forward
-####Due: Dec. 4, 2019
+#### Team Variable: Patrik Kelemen, Nolan Belnap, Angelica Paynter, Zhen Wang, Mathieu Bellefeuille
+#### SEG 2105, Prof Andrew Forward
+#### Due: Dec. 4, 2019
 
 ## Introduction
 
@@ -24,11 +24,11 @@ waiting time and rating from patients.
 ## Team Roles
 
 |Team Member| Deliverable 1| Deliverable 2| Deliverable 3| Deliverable 4|
-|Patrik Kelemen |  |
-| Nolan Belnap |  |
-| Angelica Paynter | |
-| Zhen Wang |  | | |
-| Mathieu Bellefeuille | | | |
+|Patrik Kelemen |  | | | |
+| Nolan Belnap |  | | | |
+| Angelica Paynter | | | | | 
+| Zhen Wang |  | | | |
+| Mathieu Bellefeuille | | | | |
 
 ## App Screenshots
 
