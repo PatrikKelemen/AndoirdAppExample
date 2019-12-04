@@ -1,8 +1,8 @@
-### Final Report
+# Final Report
 
-Team Variable: Patrik Kelemen, Nolan Belnap, Angelica Paynter, Zhen Wang, Mathieu Bellefeuille
-SEG 2105, Prof Andrew Forward
-Due: Dec. 4, 2019
+####Team Variable: Patrik Kelemen, Nolan Belnap, Angelica Paynter, Zhen Wang, Mathieu Bellefeuille
+####SEG 2105, Prof Andrew Forward
+####Due: Dec. 4, 2019
 
 ## Introduction
 
@@ -23,6 +23,52 @@ waiting time and rating from patients.
 
 ## Team Roles
 
+|Team Member| Deliverable 1| Deliverable 2| Deliverable 3| Deliverable 4|
+|Patrik Kelemen |  |
+| Nolan Belnap |  |
+| Angelica Paynter | |
+| Zhen Wang |  | | |
+| Mathieu Bellefeuille | | | |
+
 ## App Screenshots
 
 ## Lessons Learned
+
+In building this app we learned many things by overcoming the numerous challenges we encountered. The largest of these challenges was to 
+integerate the database into the app. We had a persistant error where our app would crash as soon as we opened it 
+when we originally set it up with the database. It took a lot of debugging to eventually figure out that anything that gets 
+stored in the database needs an empty constructor. During this we learned where the error messages are printed 
+in Android Studio and much more about integrating Firebase into Android apps. 
+
+After we got the database working we learned that Firebase needs a 
+google-services.json file to connect to the database. Git automatically ignores this when commiting for security
+reasons. We could override this but we decided against it, also for security reasons. We learned that in the future we 
+should make the database with a throwaway gmail account so we don't have to worry about somebody's account being 
+exposed to risk. That way we could upload the google-services.json file so that everyone has access to the database.
+
+Right near the end of developping our app we discovered how to store links between objects in the database. Throughtout
+our entire app when we needed to link anything to an account or clinic we would save the name of the specific account
+or clinic in the instance variables of the object. Then when we got the object from the database we would search and 
+find the account or clinic that had that name. This is why our UML looks like it is missing associations. 
+We couldn't figure out how to store links between objects until the very
+end when it was already too late to change everything. However, we now know how to do this for our next project.
+
+We learned the basics of using Android Studio to build Android apps and how Android apps function. We started with 
+Activities and how to navigate between them while passing information. Many of the things we learned while designing 
+the GUI and each of the screens were small little tricks and such. One big thing we did learn for the GUI was how to 
+use RecyclerView. This was used in most of the places where we have lists of items in the app. It is a multistep process
+that involves creating an adapter that holds all the smaller views that form the list, binding those views when 
+they are added to the list, and creating the views themselves in a separate XML file. The process got more complicated 
+if there were buttons or pop-up dialogs on each view in the list. Those required onClickListeners to be assigned and 
+the use of interfaces to allow the methods to be defined in the activity class but assigned to the individual views 
+and called in the adapter class. 
+
+Among all the technical things we learned we were also able to work on our soft skills. We were able to improve our
+skills for working with a team of completely unknown people. We learned that things like establishing weekly meetings 
+and a single group chat will help speed up the process and allow everyone to stay on the same page. We learned how to
+better coordinate our efforts for dividing up work and making sure everyone gets their parts done on time.  
+
+All the lessons we learned will hopefully help us in future team projects. Our soft skills will be easy to transfer 
+forward to new projects that aren't necessarily related to app development. The Android specific skills may only be 
+useful in future app projects or similar projects where through our understanding of this we can understand the 
+new app development IDE quicker. The Firebase knowledge will likely be useful in any future project which requires a database. 
