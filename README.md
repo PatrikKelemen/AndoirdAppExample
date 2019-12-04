@@ -69,3 +69,21 @@ Additional Notes:
 
 ## Deliverable 4
 [![CircleCI](https://circleci.com/gh/mat2020/TestCircleCi.svg?style=svg)](https://circleci.com/gh/mat2020/TestCircleCi)
+
+The purpose of this deliverable was to:
+
+- update our [UML diagram](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable03/UML/) to reflect changes to the classes
+- submit a working [APK](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable03/APK/)
+- create 10 new [Unit tests](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable03/app/p1-master/app/src/androidTest/java/com/uottawa/project) for our app (not testing instrumentation or Espresso UI testing)
+- write a final report
+- Patients can now search for clinics by name, address, working hours or type of services they provide
+- Patients can see the approx wait time
+- Patients can book an appointment and check in to that appointment
+- Patients can rate a clinic and leave a comment
+- integrate CircleCi
+- validate all fields
+- bonus for good UI
+
+Additional Notes:
+- Note: Database was changed to Firebase from SQLite in Deliverable 1, google-services.json is not tracked by GitHub for security purposes, the APK will work 
+- There is one Admin account. The login is username: admin, password: 5T5ptQ
