@@ -1,8 +1,8 @@
 # Final Report
 
-#### Team Variable: Patrik Kelemen, Nolan Belnap, Angelica Paynter, Zhen Wang, Mathieu Bellefeuille
-#### SEG 2105, Prof Andrew Forward
-#### Due: Dec. 4, 2019
+**Team Variable: Patrik Kelemen, Nolan Belnap, Angelica Paynter, Zhen Wang, Mathieu Bellefeuille
+SEG 2105, Prof Andrew Forward
+Due: Dec. 4, 2019**
 
 ## Introduction
 
@@ -29,7 +29,7 @@ waiting time and rating from patients.
 | Nolan Belnap | Setup database and add to app | Add, edit and remove Services by Admin| Employees can create clinics and add/remove services from clinics | 2 Unit Tests, Fixing up adding/removing services from clinics|
 | Angelica Paynter | Create Account and subclasses | Admin can delete Patient and Employee accounts | Employees can view and edit both their own working hours and those of the clinic| Patients can book and check in to an appointment and rate a clinic, 2 Unit Tests, final report | 
 | Zhen Wang | Create UI for Deliverable 1 (login screen and welcome screen) | Adding error messages for invalid field entries | Add 2 new Unit Tests | Make UI look pretty, 2 Unit tests|
-| Mathieu Bellefeuille | Create UML diagram, store passwords in SHA-256 | Update UML diagram and add 5 Unit Tests | Update UML diagram | Integrate CircleCi, clinis show wait time and rating, Patients can search for clinics, 2 Unit Tests |
+| Mathieu Bellefeuille | Create UML diagram, store passwords in SHA-256 | Update UML diagram and add 5 Unit Tests | Update UML diagram | Integrate CircleCi, clinics show wait time and rating, Patients can search for clinics, 2 Unit Tests |
 
 ** For Deliverable 2 and onward Patrik integrated the database into other's work since he was the only one with the google-services.json file.
 
