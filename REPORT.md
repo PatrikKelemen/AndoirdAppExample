@@ -57,7 +57,7 @@ Admin managing accounts
 
 Admin managing accounts dialog
 
-![Manage Accounts](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageAccountsDialog.png)
+![Manage Accounts](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/ManageAccountsDialog.png)
 
 Admin managing services
 
@@ -65,7 +65,7 @@ Admin managing services
 
 Admin managing services dialog
 
-![Manage Services](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageServicesDialog.png)
+![Manage Services](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/ManageServicesDialog.png)
 
 Admin managing clinics
 
@@ -73,7 +73,7 @@ Admin managing clinics
 
 Admin managing clinics dialog
 
-![Manage Clinics](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageClinicsDialog.png)
+![Manage Clinics](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/ManageClinicsDialog.png)
 
 Employee screen without clinic
 
@@ -97,11 +97,11 @@ Employee managing their own hours
 
 Patient screen
 
-![Patient Screen](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194938.jpg)
+![Patient Screen](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194938_com.uottawa.project.jpg)
 
 Searching for a clinic
 
-![Search for Clinic](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194907_com.ottawa.project.jpg)
+![Search for Clinic](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194907_com.uottawa.project.jpg)
 
 Search results
 
