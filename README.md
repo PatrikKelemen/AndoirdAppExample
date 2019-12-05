@@ -73,7 +73,7 @@ Additional Notes:
 The purpose of this deliverable was to:
 
 - update our [UML diagram](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/UML/UML_diagram_4.png) to reflect changes to the classes
-- submit a working [APK](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable04/APK/)
+- submit a working APK (in root)
 - create 10 new [Unit tests](https://github.com/professor-forward/project-lab01-variable/tree/f/deliverable04/app/p1-master/app/src/androidTest/java/com/uottawa/project) for our app (not testing instrumentation or Espresso UI testing)
 - write a final report
 - Patients can now search for clinics by name, address, working hours or type of services they provide
