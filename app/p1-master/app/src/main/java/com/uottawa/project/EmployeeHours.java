@@ -57,7 +57,7 @@ public class EmployeeHours extends AppCompatActivity {
         //you will need to change it please
         CalendarView cal = (CalendarView) findViewById(R.id.calendar);
         selectedDate = cal.getDate();
-        updateScreen();
+
 
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -164,10 +164,11 @@ public class EmployeeHours extends AppCompatActivity {
 
 
                 if (currentEmployeeHours == null){
-                    currentEmployeeHours = new Hours();
+                    currentEmployeeHours = new Hours(username);
                     currentEmployeeHours.setId(database.push().getKey());
+                    database.child(currentEmployeeHours.getId()).setValue(currentEmployeeHours);
                 }
-
+                updateScreen();
             }
 
             @Override

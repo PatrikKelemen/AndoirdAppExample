@@ -22,12 +22,22 @@ public class Clinic {
     /*
      * The array of hours the Clinic opens at.
      */
-    private int[] openHours;
+    protected int[] openHours;
 
     /*
      * The array of hours the Clinic closes at.
      */
-    private int[] closeHours;
+    protected int[] closeHours;
+
+    /*
+     * The arraylist of comments of the clinic.
+     */
+    private ArrayList<String> commentStorage= new ArrayList<>();
+
+    /*
+     * The arraylist of rating of the clinic.
+     */
+    private ArrayList<Float> ratingStorage= new ArrayList<>();
 
     private String id;
 
@@ -40,7 +50,9 @@ public class Clinic {
      * @param name a string with the name of the Clinic
      */
     public Clinic(String name) {
+
         this.name = name;
+
     }
 
 
@@ -70,11 +82,25 @@ public class Clinic {
 
     /**
      * Sets the hours of operation of the Clinic.
+     * @param hours
      */
-    public void setHours() {
+    public void setHours(int[] hours) {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
+    /**
+     * Sets the Openhours of operation of the Clinic.
+     */
+    public void setOpenHours(int[] hours) {
+        this.openHours = hours;
+    }
+
+    /**
+     * Sets the hours of operation of the Clinic.
+     */
+    public void setClosingHours(int[] hours) {
+        this.closeHours = hours;
+    }
     /**
      * Adds the employee to the clinic.
      * @param employee the employee to be added
@@ -86,10 +112,16 @@ public class Clinic {
     public ArrayList<Employee> getEmployees() {
         return employees;
     }
+
     public String getName() {
         return name;
     }
+
     public String getID(){return id;}
+
     public void setID(String id){this.id=id;}
 
+    public ArrayList<Service>  getServices() {
+        return services;
+    }
 }

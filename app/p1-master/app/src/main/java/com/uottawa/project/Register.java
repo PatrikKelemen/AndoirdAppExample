@@ -163,7 +163,7 @@ public class Register extends AppCompatActivity {
 
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
             } else {
-                intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                intent = new Intent(getApplicationContext(), PatientScreen.class);
                 intent.putExtra("accountType",stringUserType);
             }
 

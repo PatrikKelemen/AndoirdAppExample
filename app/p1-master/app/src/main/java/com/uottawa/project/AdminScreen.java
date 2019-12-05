@@ -33,6 +33,10 @@ public class AdminScreen extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ManageAccounts.class);
         startActivityForResult(intent, 0);
     }
+    public void onManageClinics (View view) {
+        Intent intent = new Intent(getApplicationContext(), ManageClinics.class);
+        startActivityForResult(intent,0);
+    }
 
     public void onLogout(View view) {
         Intent returnIntent = new Intent();

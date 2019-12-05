@@ -1,5 +1,4 @@
 package com.uottawa.project;
-package com.uottawa.project;
 
 import android.widget.TextView;
 

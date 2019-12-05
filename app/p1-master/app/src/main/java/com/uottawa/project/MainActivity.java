@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     List<Account> users;
     private DbHandler mydb = new DbHandler();
     DatabaseReference Clinics;
-    List<Clinic> ClinicList;
+    static ArrayList<Clinic> ClinicList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,12 @@ public class MainActivity extends AppCompatActivity {
         users = new ArrayList<>();
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance().getReference("users");
-        ClinicList = new ArrayList<>();
+        ClinicList = new ArrayList<Clinic>();
+
+        //for test default clinic
+        ClinicList.add(new Clinic("Clinic1"));
+        ClinicList.add(new Clinic("Clinic2"));
+
         Clinics = FirebaseDatabase.getInstance().getReference("Clinics");
     }
 
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (dbUser.getAccountType().equals("Employee")) {
                     //check if employee is part of a clinic
                     boolean hasClinic = false;
-                    Clinic employeesClinic = ClinicList.get(1);
+                    Clinic employeesClinic= null;
 
                     for (int i = 0; i< ClinicList.size();i++){
                         ArrayList<Employee> next = ClinicList.get(i).getEmployees();
@@ -169,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("accountType","Employee");
                 //Patient (or is an error, the least amount of damage can be done with a Patient Account)
                 } else {
-                    intent = new Intent(getApplicationContext(), WelcomeScreen.class);
+                    intent = new Intent(getApplicationContext(), PatientScreen.class);
                     intent.putExtra("accountType","Patient");
                 }
 

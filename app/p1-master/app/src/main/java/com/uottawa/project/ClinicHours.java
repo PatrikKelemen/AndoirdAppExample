@@ -43,14 +43,13 @@ public class ClinicHours extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance().getReference("ClinicHours");
 
-        //get the currentEmployeeHours here
-        currentClinicHours = new Hours("Jeff"); //for testing
+
 
         //updateScreen changes the display to mirror the working hours in the database
         //you will need to change it please
         CalendarView cal = (CalendarView) findViewById(R.id.clinicCalendar);
         selectedDate = cal.getDate();
-        updateScreen();
+
 
         cal.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -152,10 +151,12 @@ public class ClinicHours extends AppCompatActivity {
                 }
 
                 if (currentClinicHours == null){
-                    currentClinicHours = new Hours();
+                    System.out.print("birrrrrd");
+                    currentClinicHours = new Hours(clinicName);
                     currentClinicHours.setId(database.push().getKey());
+                    database.child(currentClinicHours.getId()).setValue(currentClinicHours);
                 }
-
+                updateScreen();
             }
 
             @Override

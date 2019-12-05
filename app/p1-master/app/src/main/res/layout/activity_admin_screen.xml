@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".AdminScreen">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/app_background_faded" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,6 +44,13 @@
                 android:layout_height="wrap_content"
                 android:onClick="onManageAccounts"
                 android:text="Manage Accounts" />
+
+            <Button
+                android:id="@+id/btnClinics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onManageClinics"
+                android:text="Manage Clinics" />
 
             <Button
                 android:id="@+id/logOut"
