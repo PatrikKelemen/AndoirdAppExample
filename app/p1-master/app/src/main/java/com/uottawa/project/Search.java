@@ -69,35 +69,14 @@ public class Search extends AppCompatActivity {
                 if (SearchBox.getText().toString().isEmpty() || (SearchBox.getText().toString().compareTo("Enter Search") == 0)) {
                     Toast.makeText(getApplicationContext(), "No search parameter entered", Toast.LENGTH_SHORT).show();
                 }else{
-                    breakLoop:
-                    for (Clinic item : ClinicList ){
-                        if ((SearchContent.compareTo(item.getName()) == 0)) {
-                            ResultClinic.add(item);
-                            //return item
-                            Toast.makeText(getApplicationContext(), item.getName(), Toast.LENGTH_SHORT).show();
 
-                            break breakLoop;
-                        }
-                    }
-                    for (int i = 0; i < ResultClinic.size(); i++) {
-                        ratingsList.add((float)0.0);
-                    }
-
-                    for (int j =0; j< ResultClinic.size(); j++) {
-
-                        int counter =0;
+                    ResultClinic = searchClinic(ClinicList,SearchContent);
 
 
-                        for (int i = 0; i < intaialratingsList.size(); i++) {
-                            if (intaialratingsList.get(i).getClinic().equals(ResultClinic.get(j).getName())){
-                                counter++;
-                                ratingsList.set(j, ratingsList.get(j) + intaialratingsList.get(i).getRating());
-                            }
-                        }
-                        if (counter !=0) {
-                            ratingsList.set(j, ratingsList.get(j) / counter);
-                        }
-                    }
+                    ratingsList= calRating(ResultClinic,intaialratingsList);
+
+
+
                     onSearch(v);
                 }
 
@@ -157,6 +136,44 @@ public class Search extends AppCompatActivity {
         Intent myIntent = new Intent(this,SearchResult.class);
         myIntent.putExtra("username",intent.getStringExtra("username"));
         startActivity(myIntent);
+    }
+
+    public static  List<Clinic> searchClinic (List <Clinic> ClinicList, String SearchContent ){
+        List<Clinic> ResultClinic= new ArrayList<>();
+        breakLoop:
+        for (Clinic item : ClinicList ){
+            if ((SearchContent.compareTo(item.getName()) == 0)) {
+                ResultClinic.add(item);
+                break breakLoop;
+            }
+        }
+
+        return ResultClinic;
+    }
+
+    public static List<Float> calRating (List <Clinic> ResultClinic, List <Review> intaialratingsList ){
+         List<Float> ratingsList = new ArrayList<>();
+        for (int i = 0; i < ResultClinic.size(); i++) {
+            ratingsList.add((float)0.0);
+        }
+
+        for (int j =0; j< ResultClinic.size(); j++) {
+
+            int counter =0;
+
+
+            for (int i = 0; i < intaialratingsList.size(); i++) {
+                if (intaialratingsList.get(i).getClinic().equals(ResultClinic.get(j).getName())){
+                    counter++;
+                    ratingsList.set(j, ratingsList.get(j) + intaialratingsList.get(i).getRating());
+                }
+            }
+            if (counter !=0) {
+                ratingsList.set(j, ratingsList.get(j) / counter);
+            }
+        }
+
+        return(ratingsList);
     }
 
 }
