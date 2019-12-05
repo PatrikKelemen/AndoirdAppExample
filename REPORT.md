@@ -55,13 +55,25 @@ Admin managing accounts
 
 ![Manage Accounts](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageAccounts.png)
 
+Admin managing accounts dialog
+
+![Manage Accounts](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageAccountsDialog.png)
+
 Admin managing services
 
 ![Manage Services](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageServices.png)
 
+Admin managing services dialog
+
+![Manage Services](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageServicesDialog.png)
+
 Admin managing clinics
 
 ![Manage Clinics](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageClinics.png)
+
+Admin managing clinics dialog
+
+![Manage Clinics](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageClinicsDialog.png)
 
 Employee screen without clinic
 
@@ -82,6 +94,41 @@ Employee managing clinic's hours
 Employee managing their own hours
 
 ![Manage Hours](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/manageHours.png)
+
+Patient screen
+
+![Patient Screen](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194938.jpg)
+
+Searching for a clinic
+
+![Search for Clinic](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194907_com.ottawa.project.jpg)
+
+Search results
+
+![Search Results](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194913_com.uottawa.project.jpg)
+
+Select clinic
+
+![Select Clinic](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194919_com.uottawa.project.jpg)
+
+Booking an appointment
+
+![Booking an Appointment](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194926_com.uottawa.project.jpg)
+
+After checking into appointment
+
+![Post Check in](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194945_com.uottawa.project.jpg)
+
+Writing a review
+
+![Review Writing](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_194950_com.uottawa.project.jpg)
+
+Updated clinic search results rating
+
+![Updated Clinic](https://github.com/professor-forward/project-lab01-variable/blob/f/deliverable04/screenshots/Screenshot_20191204_195025_com.uottawa.project.jpg)
+
+
+
 
 ## Lessons Learned
 
